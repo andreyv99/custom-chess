@@ -1,23 +1,15 @@
 import { Component } from '@angular/core';
-import * as stockfish from 'stockfish';
+
+import { EngineService } from './stockfish-engine/engine.service';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  stockfish = stockfish;
-  runWorker() {
-    // let a = stockfish;
-    const demoWorker = new Worker("stockfish", {
-      type: "module",
-    });
-
-    demoWorker.onmessage = (message) => {
-      console.log(`Got message`, message.data);
-    };
-
-    demoWorker.postMessage("hello");
-  }
+  constructor(private engineService: EngineService) {}
+    runWorker() {
+      this.engineService.startEngine();
+    }
 }
