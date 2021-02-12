@@ -1,3 +1,12 @@
 <div class="cell"
+     (drop)="drop($event)"
+     (dragover)="allowDrop($event)"
      #elem
-     [attr.cell-id]="getCellId(index)">3</div>
+     [attr.cell-id]="cellId">{{cellId}}
+  <app-chessmen *ngIf="chessmenStarterModel[cellId]"
+                [imageName]="chessmenStarterModel[cellId].imgName"
+                [id]="cellId"
+                [attr.a-id]="cellId"
+                (dragstart)="drag($event)"
+                draggable="true"></app-chessmen>
+</div>

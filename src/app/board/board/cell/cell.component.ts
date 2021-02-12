@@ -1,21 +1,27 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ChessmenStarterModel } from 'src/app/models/chessmen.models';
 
 @Component({
-  selector: "[app-cell]",
+  selector: "app-cell",
   templateUrl: "./cell.component.html",
   styleUrls: ["./cell.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CellComponent implements OnInit, AfterViewInit {
   @Input() index: number;
   @ViewChild("elem") elem: ElementRef;
 
+  chessmenStarterModel = ChessmenStarterModel;
+  cellId: string;
   row: number;
 
   readonly cellLetterArr = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
   constructor(private renderer: Renderer2) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cellId = this.getCellId(this.index);
+  }
 
   ngAfterViewInit(): void {
     const rowIsOdd = this.checkIfOdd(this.row);
@@ -49,5 +55,23 @@ export class CellComponent implements OnInit, AfterViewInit {
 
   private setCellClass(cssClass: string): void {
     this.renderer.addClass(this.elem.nativeElement, cssClass);
+  }
+
+  drag(ev) {
+    console.log(ev);
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+
+  allowDrop(ev) {
+    ev.preventDefault();
+  }
+
+  drop(ev) {
+    console.log(ev);
+
+    ev.preventDefault();
+    const data = ev.dataTransfer.getData("text");
+    console.log(document.querySelector(`[a-id="${data}"]`));
+    ev.target.appendChild(document.querySelector(`[a-id="${data}"]`));
   }
 }
