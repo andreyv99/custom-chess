@@ -1,12 +1,4 @@
 <div class="board">
-  <!-- <div class="cell"
-       (drop)="drop($event)"
-       (dragover)="allowDrop($event)"
-       id="div1"
-       *ngFor="let index of cellIndexArr"
-       appCell
-       [index]="index">
-  </div> -->
   <ng-container *ngFor="let index of cellIndexArr">
     <app-cell [index]="index"
               class="d-block">

@@ -67,11 +67,8 @@ export class CellComponent implements OnInit, AfterViewInit {
   }
 
   drop(ev) {
-    console.log(ev);
-
     ev.preventDefault();
     const data = ev.dataTransfer.getData("text");
-    console.log(document.querySelector(`[a-id="${data}"]`));
     ev.target.appendChild(document.querySelector(`[a-id="${data}"]`));
   }
 }
