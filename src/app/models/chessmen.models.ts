@@ -1,4 +1,8 @@
-interface chessmenInterface {}
+export interface cellInterface {
+  id: string;
+  imgName: string[] | null;
+  color: string;
+}
 
 export const ChessmenStarterModel = {
   a1: {

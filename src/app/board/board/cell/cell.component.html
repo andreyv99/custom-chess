@@ -1,12 +1,9 @@
-<div class="cell"
-     (drop)="drop($event)"
-     (dragover)="allowDrop($event)"
-     #elem
-     [attr.cell-id]="cellId">{{cellId}}
+<!-- <div class="cell"
+     [attr.cell-id]="cellId">
   <app-chessmen *ngIf="chessmenStarterModel[cellId]"
-                [imageName]="chessmenStarterModel[cellId].imgName"
-                [id]="cellId"
-                [attr.a-id]="cellId"
-                (dragstart)="drag($event)"
-                draggable="true"></app-chessmen>
-</div>
+                class="d-block"
+                cdkDrag
+                [imageName]="imgName"></app-chessmen>
+</div> -->
+<span *ngFor="let item of imgName"
+      cdkDrag>{{item}}</span>

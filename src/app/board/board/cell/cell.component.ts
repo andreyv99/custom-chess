@@ -8,7 +8,7 @@ import { ChessmenStarterModel } from 'src/app/models/chessmen.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CellComponent implements OnInit, AfterViewInit {
-  @Input() index: number;
+  @Input() imgName: string[];
   @ViewChild("elem") elem: ElementRef;
 
   chessmenStarterModel = ChessmenStarterModel;
@@ -20,25 +20,25 @@ export class CellComponent implements OnInit, AfterViewInit {
   constructor(private renderer: Renderer2) {}
 
   ngOnInit(): void {
-    this.cellId = this.getCellId(this.index);
+    // this.cellId = this.getCellId(this.index);
   }
 
   ngAfterViewInit(): void {
-    const rowIsOdd = this.checkIfOdd(this.row);
-    const cellIsOdd = this.checkIfOdd(this.index);
-    if (rowIsOdd) {
-      if (cellIsOdd) {
-        this.setCellClass("black");
-      } else {
-        this.setCellClass("white");
-      }
-    } else {
-      if (cellIsOdd) {
-        this.setCellClass("white");
-      } else {
-        this.setCellClass("black");
-      }
-    }
+    // const rowIsOdd = this.checkIfOdd(this.row);
+    // const cellIsOdd = this.checkIfOdd(this.index);
+    // if (rowIsOdd) {
+    //   if (cellIsOdd) {
+    //     this.setCellClass("black");
+    //   } else {
+    //     this.setCellClass("white");
+    //   }
+    // } else {
+    //   if (cellIsOdd) {
+    //     this.setCellClass("white");
+    //   } else {
+    //     this.setCellClass("black");
+    //   }
+    // }
   }
 
   getCellId(index: number): string {
@@ -57,18 +57,20 @@ export class CellComponent implements OnInit, AfterViewInit {
     this.renderer.addClass(this.elem.nativeElement, cssClass);
   }
 
-  drag(ev) {
-    console.log(ev);
-    ev.dataTransfer.setData("text", ev.target.id);
-  }
-
-  allowDrop(ev) {
-    ev.preventDefault();
-  }
-
-  drop(ev) {
-    ev.preventDefault();
-    const data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.querySelector(`[a-id="${data}"]`));
-  }
+  // drop(event: CdkDragDrop<string[]>) {
+  //   if (event.previousContainer === event.container) {
+  //     moveItemInArray(
+  //       event.container.data,
+  //       event.previousIndex,
+  //       event.currentIndex
+  //     );
+  //   } else {
+  //     transferArrayItem(
+  //       event.previousContainer.data,
+  //       event.container.data,
+  //       event.previousIndex,
+  //       event.currentIndex
+  //     );
+  //   }
+  // }
 }
