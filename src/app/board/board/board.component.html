@@ -7,22 +7,10 @@
        (cdkDropListDropped)="drop($event)"
        class="cell"
        [class]="item.color">
-    <ng-container *ngIf="item.imgName.length > 0">
-      <app-chessmen *ngFor="let item of item.imgName"
-                    class="d-block"
+    <ng-container *ngIf="checkIfChessmenNeeded(item.imgName)">
+      <app-chessmen *ngFor="let item of getChessmenArr(item.imgName)"
                     cdkDrag
-                    [imageName]="item">}</app-chessmen>
+                    [imageName]="item"></app-chessmen>
     </ng-container>
   </div>
-
 </div>
-<!-- <div *ngFor="let index of cellIndexArr1"
-     cdkDropList
-     [id]="index.b"
-     [cdkDropListData]="index.a"
-     [cdkDropListConnectedTo]="allDropLists"
-     (cdkDropListDropped)="drop($event)"
-     class="d-block">
-  <div *ngFor="let item of index.a"
-       cdkDrag>{{item}}</div>
-</div> -->

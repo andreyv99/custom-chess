@@ -1,49 +1,45 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { cellInterface, ChessmenStarterModel } from 'src/app/models/chessmen.models';
 
 @Component({
   selector: "app-board",
   templateUrl: "./board.component.html",
   styleUrls: ["./board.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardComponent implements OnInit {
+  constructor() {}
   readonly cellAmount = 64;
 
   readonly cellLetterArr = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
   chessmenStarterModel = ChessmenStarterModel;
 
-  cellIndexArr: number[];
-  cellIndexArr1 = [
-    {
-      b: "sqwdf",
-      a: ["wef"],
-    },
-    {
-      b: "sdbbf",
-      a: ["22"],
-    },
-    {
-      b: "awd",
-      a: ["354"],
-    },
-  ];
-
   cellsModel: cellInterface[];
-
-  constructor() {}
   allDropLists: string[];
-  ngOnInit(): void {
-    this.cellIndexArr = Array.apply(null, { length: this.cellAmount }).map(
-      (x, i) => ++i
-    );
 
+  ngOnInit(): void {
     this.cellsModel = Array.apply(null, {
       length: this.cellAmount,
     }).map((x, i) => this.getCellInfo(++i));
+
     this.allDropLists = [...this.cellsModel.map((_) => _.id)];
-    console.log(this.cellsModel);
+  }
+
+  checkIfChessmenNeeded(item: string[]): boolean {
+    if (item.length === 0 || item[0].length === 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  getChessmenArr(arr: string[]): string[] {
+    if (arr.length > 1) {
+      arr.pop();
+    }
+    return arr;
   }
 
   private getCellInfo(index: number): cellInterface {
@@ -98,7 +94,6 @@ export class BoardComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log(this.allDropLists);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -110,7 +105,7 @@ export class BoardComponent implements OnInit {
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex
+        0
       );
     }
   }

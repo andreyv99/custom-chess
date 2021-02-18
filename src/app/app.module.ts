@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board/board.component';
-import { CellComponent } from './board/board/cell/cell.component';
 import { ChessmenComponent } from './chessmen/chessmen.component';
 import { CellDirective } from './directives/cell.directive';
 
@@ -13,7 +12,6 @@ import { CellDirective } from './directives/cell.directive';
   declarations: [
     AppComponent,
     BoardComponent,
-    CellComponent,
     CellDirective,
     ChessmenComponent,
   ],

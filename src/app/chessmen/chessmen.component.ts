@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: "app-chessmen",
   templateUrl: "./chessmen.component.html",
   styleUrls: ["./chessmen.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChessmenComponent implements OnInit {
   @Input() imageName: string;
