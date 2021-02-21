@@ -1,15 +1,14 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { cellInterface, ChessmenStarterModel } from 'src/app/models/chessmen.models';
+import { EngineService } from 'src/app/stockfish-engine/engine.service';
 
 @Component({
   selector: "app-board",
   templateUrl: "./board.component.html",
   styleUrls: ["./board.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardComponent implements OnInit {
-  constructor() {}
   readonly cellAmount = 64;
 
   readonly cellLetterArr = ["a", "b", "c", "d", "e", "f", "g", "h"];
@@ -19,12 +18,39 @@ export class BoardComponent implements OnInit {
   cellsModel: cellInterface[];
   allDropLists: string[];
 
+  constructor(private engineService: EngineService) {}
+
   ngOnInit(): void {
     this.cellsModel = Array.apply(null, {
       length: this.cellAmount,
     }).map((x, i) => this.getCellInfo(++i));
 
     this.allDropLists = [...this.cellsModel.map((_) => _.id)];
+
+    this.engineService.moveByEngine.subscribe((move) => {
+      console.log(move);
+      this.makeMoveByEngine(move);
+    });
+  }
+
+  makeMoveByEngine(move: string): void {
+    const startPos = move.slice(0, 2);
+    const endPos = move.slice(2, 4);
+    const chessmenImgArr: string[] = [];
+
+    for (const item of this.cellsModel) {
+      if (item.id === startPos) {
+        chessmenImgArr.push(item.imgName[0]);
+        item.imgName = [];
+      }
+    }
+
+    for (const item of this.cellsModel) {
+      if (item.id === endPos) {
+        item.imgName = chessmenImgArr;
+      }
+    }
+    console.log(this.cellsModel);
   }
 
   checkIfChessmenNeeded(item: string[]): boolean {
@@ -94,6 +120,7 @@ export class BoardComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
+    console.log(this.cellsModel);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -108,5 +135,9 @@ export class BoardComponent implements OnInit {
         0
       );
     }
+
+    this.engineService.moveByUser(
+      event.previousContainer.id + event.container.id
+    );
   }
 }
