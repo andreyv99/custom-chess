@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { EngineService } from './stockfish-engine/engine.service';
 
@@ -7,26 +7,14 @@ import { EngineService } from './stockfish-engine/engine.service';
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(private engineService: EngineService) {}
+
+  ngOnInit(): void {
+    this.runWorker();
+  }
+
   runWorker() {
     this.engineService.startEngine();
-  }
-
-  allowDrop(ev) {
-    ev.preventDefault();
-  }
-
-  drag(ev) {
-    console.log(ev);
-    ev.dataTransfer.setData("text", ev.target.id);
-  }
-
-  drop(ev) {
-    console.log(ev);
-
-    ev.preventDefault();
-    const data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
   }
 }
