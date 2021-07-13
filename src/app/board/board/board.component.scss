@@ -12,10 +12,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  & app-chessmen:nth-child(2) {
+    opacity: 0;
+  }
+}
+
+.chessmen {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
 }
 
 .white {
-background-color: white;
+  background-color: white;
 }
 
 .black {
@@ -24,4 +33,12 @@ background-color: white;
 
 .d-block {
   display: block;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

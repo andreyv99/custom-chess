@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { EngineService } from './stockfish-engine/engine.service';
+import { EngineService } from './services/engine.service';
 
 @Component({
   selector: "app-root",

@@ -1,16 +1,21 @@
 <div class="board">
-  <div *ngFor="let item of cellsModel"
-       cdkDropList
-       [id]="item.id"
-       [cdkDropListData]="item.imgName"
-       [cdkDropListConnectedTo]="allDropLists"
-       (cdkDropListDropped)="drop($event)"
-       class="cell"
-       [class]="item.color">
+  <div
+    *ngFor="let item of cellsModel$ | async"
+    cdkDropList
+    [id]="item.id"
+    [cdkDropListData]="item.imgName"
+    [cdkDropListConnectedTo]="allDropLists"
+    (cdkDropListDropped)="drop($event)"
+    class="cell"
+    [class]="item.color"
+  >
     <ng-container *ngIf="checkIfChessmenNeeded(item.imgName)">
-      <app-chessmen *ngFor="let item of getChessmenArr(item.imgName)"
-                    cdkDrag
-                    [imageName]="item"></app-chessmen>
+      <app-chessmen
+        *ngFor="let item of getChessmenArr(item.imgName)"
+        cdkDrag
+        class="chessmen"
+        [imageName]="item"
+      ></app-chessmen>
     </ng-container>
   </div>
 </div>

@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
+import { BoardService } from './board.service';
+
 @Injectable({
   providedIn: "root",
 })
 export class EngineService {
   engineWorker: Worker;
   moves: string[] = [];
-  moveByEngine = new Subject<string>();
+  moveByEngineSubject = new Subject<string>();
+  moveByEngine$ = this.moveByEngineSubject.asObservable();
+
+  constructor(private boardService: BoardService) {}
 
   startEngine() {
     this.engineWorker = new Worker("stockfish", {
@@ -28,7 +33,8 @@ export class EngineService {
     if (message.includes("bestmove")) {
       const move = message.substring(9, 13);
       this.moves.push(move);
-      this.moveByEngine.next(move);
+      this.boardService.makeMoveByEngine(move);
+      // this.moveByEngineSubject.next(move);
     }
   }
 
@@ -46,6 +52,5 @@ export class EngineService {
     this.moves.push(move);
     this.sendMessage("position startpos moves " + this.moves.join(" "));
     this.sendMessage("go");
-    console.log("position startpos moves " + this.moves.join(" "));
   }
 }
