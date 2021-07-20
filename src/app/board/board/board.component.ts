@@ -1,4 +1,4 @@
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { cellInterface, ChessmenStarterModel } from 'src/app/models/chessmen.models';
@@ -46,23 +46,17 @@ export class BoardComponent {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
+    if (event.previousContainer !== event.container) {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         0
       );
-    }
 
-    this.engineService.moveByUser(
-      event.previousContainer.id + event.container.id
-    );
+      this.engineService.moveByUser(
+        event.previousContainer.id + event.container.id
+      );
+    }
   }
 }

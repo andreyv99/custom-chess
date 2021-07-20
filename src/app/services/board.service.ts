@@ -20,7 +20,7 @@ export class BoardService {
   cellsModel: cellInterface[];
   cellsModel$ = this.cellsModelSubject.asObservable();
 
-  private getCellsModel(): cellInterface[] {
+  getCellsModel(): cellInterface[] {
     this.cellsModel = Array.apply(null, {
       length: this.cellAmount,
     }).map((x, i) => this.getCellInfo(++i));

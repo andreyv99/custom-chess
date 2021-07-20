@@ -25,6 +25,11 @@ export class EngineService {
     this.startGame();
   }
 
+  refreshGame() {
+    this.startGame();
+    this.moves = [];
+  }
+
   private sendMessage(message: string): void {
     this.engineWorker.postMessage(message);
   }
@@ -51,6 +56,6 @@ export class EngineService {
   moveByUser(move: string): any {
     this.moves.push(move);
     this.sendMessage("position startpos moves " + this.moves.join(" "));
-    this.sendMessage("go");
+    this.sendMessage("go depth 12");
   }
 }

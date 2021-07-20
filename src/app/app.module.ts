@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board/board.component';
 import { ChessmenComponent } from './chessmen/chessmen.component';
+import { ControlsComponent } from './controls/controls.component';
 import { CellDirective } from './directives/cell.directive';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { CellDirective } from './directives/cell.directive';
     BoardComponent,
     CellDirective,
     ChessmenComponent,
+    ControlsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, DragDropModule],
   providers: [],
