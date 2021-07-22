@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BoardService } from '../services/board.service';
-import { EngineService } from '../services/engine.service';
+import { BoardService } from '../../../core/services/board.service';
+import { EngineService } from '../../../core/services/engine.service';
 
 @Component({
   selector: "app-controls",

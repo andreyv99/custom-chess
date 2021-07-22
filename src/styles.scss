@@ -1,4 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-.d-flex {
-  display: flex;
+@font-face {
+  font-family: "Sans Pro";
+  src: url("/assets/fonts/SourceSansPro-Regular.ttf") format("woff2");
 }
+
+// Bootstrap variables overidding
+$font-family-base: "Sans Pro";
+//
+
+// Third Party imports
+@import "~bootstrap/scss/bootstrap";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+//

@@ -1,9 +1,9 @@
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { tap } from 'rxjs/operators';
-import { cellInterface, ChessmenStarterModel } from 'src/app/models/chessmen.models';
-import { BoardService } from 'src/app/services/board.service';
-import { EngineService } from 'src/app/services/engine.service';
+import { cellInterface, ChessmenStarterModel } from 'src/app/core/models/chessmen.models';
+import { BoardService } from 'src/app/core/services/board.service';
+import { EngineService } from 'src/app/core/services/engine.service';
 
 @Component({
   selector: "app-board",

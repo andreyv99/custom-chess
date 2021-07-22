@@ -12,7 +12,7 @@ export class EngineService {
   moveByEngineSubject = new Subject<string>();
   moveByEngine$ = this.moveByEngineSubject.asObservable();
 
-  constructor(private boardService: BoardService) { }
+  constructor(private boardService: BoardService) {}
 
   startEngine() {
     this.engineWorker = new Worker("stockfish", {
@@ -46,6 +46,11 @@ export class EngineService {
     setTimeout(() => {
       this.sendMessage("ucinewgame");
     }, 1000);
+  }
+
+  refreshGame() {
+    this.startGame();
+    this.moves = [];
   }
 
   moveByUser(move: string): any {

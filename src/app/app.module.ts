@@ -1,24 +1,25 @@
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgModule } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BoardComponent } from './board/board/board.component';
-import { ChessmenComponent } from './chessmen/chessmen.component';
-import { ControlsComponent } from './controls/controls.component';
-import { CellDirective } from './directives/cell.directive';
-import { CoreModule } from './core/core/core.module';
+import { CoreModule } from './core/core.module';
+import { FeatureModule } from './feature/feature.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    BoardComponent,
-    CellDirective,
-    ChessmenComponent,
-    ControlsComponent,
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    CoreModule,
+    SharedModule,
+    FeatureModule,
+    MatDialogModule,
   ],
-  imports: [BrowserModule, AppRoutingModule, DragDropModule, CoreModule],
   providers: [],
   bootstrap: [AppComponent],
 })

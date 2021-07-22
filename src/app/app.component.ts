@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { EngineService } from './services/engine.service';
+import { EngineService } from './core/services/engine.service';
 
 @Component({
   selector: "app-root",

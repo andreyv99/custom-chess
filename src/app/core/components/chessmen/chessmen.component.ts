@@ -14,6 +14,6 @@ export class ChessmenComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.imageUrl = "assets/" + this.imageName;
+    this.imageUrl = "assets/images/" + this.imageName;
   }
 }
