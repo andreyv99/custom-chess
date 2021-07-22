@@ -12,7 +12,7 @@ export class EngineService {
   moveByEngineSubject = new Subject<string>();
   moveByEngine$ = this.moveByEngineSubject.asObservable();
 
-  constructor(private boardService: BoardService) {}
+  constructor(private boardService: BoardService) { }
 
   startEngine() {
     this.engineWorker = new Worker("stockfish", {
@@ -23,11 +23,6 @@ export class EngineService {
       this.operateReceivedMessage(message.data);
     };
     this.startGame();
-  }
-
-  refreshGame() {
-    this.startGame();
-    this.moves = [];
   }
 
   private sendMessage(message: string): void {
@@ -56,6 +51,6 @@ export class EngineService {
   moveByUser(move: string): any {
     this.moves.push(move);
     this.sendMessage("position startpos moves " + this.moves.join(" "));
-    this.sendMessage("go depth 12");
+    this.sendMessage("go");
   }
 }

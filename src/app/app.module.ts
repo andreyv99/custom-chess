@@ -8,6 +8,7 @@ import { BoardComponent } from './board/board/board.component';
 import { ChessmenComponent } from './chessmen/chessmen.component';
 import { ControlsComponent } from './controls/controls.component';
 import { CellDirective } from './directives/cell.directive';
+import { CoreModule } from './core/core/core.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { CellDirective } from './directives/cell.directive';
     ChessmenComponent,
     ControlsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, DragDropModule],
+  imports: [BrowserModule, AppRoutingModule, DragDropModule, CoreModule],
   providers: [],
   bootstrap: [AppComponent],
 })
