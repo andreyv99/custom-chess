@@ -1,5 +1,32 @@
-<mat-form-field appearance="outline">
-  <mat-label>Enter your name</mat-label>
-  <input matInput placeholder="Andrey" />
-  <mat-hint>your name and surname</mat-hint>
-</mat-form-field>
+<form [formGroup]="logInForm"
+      (ngSubmit)="onSubmit()">
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Enter your name</mat-label>
+      <input matInput
+             placeholder="Andrey"
+             formControlName="userName" />
+      <mat-hint>your name and surname</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="pb-5">
+    <mat-form-field appearance="outline">
+      <mat-label>Enter password</mat-label>
+      <input matInput
+             placeholder="*****"
+             type="password"
+             formControlName="password" />
+    </mat-form-field>
+    <div class="position-absolute">
+      <small *ngIf="userRecognized$ | async">You need to Sign Up first or try<br> another password or username.</small>
+    </div>
+  </div>
+  <div class="pt-1 d-flex justify-content-between">
+    <button mat-raised-button
+            type="submit"
+            [disabled]="!logInForm.valid"
+            color="primary">Log In</button>
+    <a mat-raised-button
+       color="accent">Sign Up</a>
+  </div>
+</form>

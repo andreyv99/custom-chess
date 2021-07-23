@@ -1,4 +1,4 @@
-export interface localStrorageItemInterface {
+export interface storageInterface {
   key: string;
   value: string;
 }
