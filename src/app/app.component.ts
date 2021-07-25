@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from './core/services/auth.service';
 import { EngineService } from './core/services/engine.service';
-import { UserService } from './core/services/user.service';
 
 @Component({
   selector: "app-root",
@@ -9,11 +9,14 @@ import { UserService } from './core/services/user.service';
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  constructor(private engineService: EngineService, private userSvc: UserService) { }
+  constructor(
+    private engineService: EngineService,
+    private authSvc: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.runWorker();
-    this.userSvc.registerAdminFakeUser();
+    this.authSvc.registerAdminFakeUser();
   }
 
   runWorker() {

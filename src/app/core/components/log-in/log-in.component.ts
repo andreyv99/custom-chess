@@ -1,30 +1,30 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { BehaviorSubject } from 'rxjs';
 
+import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-log-in',
-  templateUrl: './log-in.component.html',
-  styleUrls: ['./log-in.component.scss']
+  selector: "app-log-in",
+  templateUrl: "./log-in.component.html",
+  styleUrls: ["./log-in.component.scss"],
 })
 export class LogInComponent {
   logInForm = new FormGroup({
     userName: new FormControl(null, Validators.required),
-    password: new FormControl(null, Validators.required)
-  })
+    password: new FormControl(null, Validators.required),
+  });
 
-  userRecognizedSubject = new BehaviorSubject(false)
-  userRecognized$ = this.userRecognizedSubject.asObservable();
-
-  constructor(private userSvc: UserService, public dialogRef: MatDialogRef<LogInComponent>) { }
+  userRecognizingError$ = this.userSvc.userRecognizingError$;
+  constructor(
+    private authSvc: AuthService,
+    public dialogRef: MatDialogRef<LogInComponent>,
+    private userSvc: UserService
+  ) {}
 
   onSubmit() {
-    const status = this.userSvc.logInUser(this.logInForm.value);
-    this.userRecognizedSubject.next(!status)
-    if (status) this.dialogRef.close()
+    const status = this.authSvc.logInUser(this.logInForm.value);
+    if (status) this.dialogRef.close();
   }
 }
-2
