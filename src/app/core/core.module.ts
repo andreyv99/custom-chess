@@ -1,13 +1,13 @@
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatStepperModule } from '@angular/material/stepper';
+import { RouterModule } from '@angular/router';
 
-import { BoardComponent } from './components/board/board.component';
-import { ChessmenComponent } from './components/chessmen/chessmen.component';
+import { SharedModule } from '../shared/shared.module';
 import { HeaderComponent } from './components/header/header.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -15,19 +15,19 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 @NgModule({
   declarations: [
     HeaderComponent,
-    BoardComponent,
-    ChessmenComponent,
     LogInComponent,
-    SignUpComponent,
+    SignUpComponent
   ],
   imports: [
     CommonModule,
-    DragDropModule,
+    SharedModule,
     MatButtonModule,
     ReactiveFormsModule,
     MatInputModule,
     MatIconModule,
+    RouterModule,
+    MatStepperModule
   ],
-  exports: [HeaderComponent, BoardComponent],
+  exports: [HeaderComponent]
 })
-export class CoreModule {}
+export class CoreModule { }

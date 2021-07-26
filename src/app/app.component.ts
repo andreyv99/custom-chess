@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from './core/services/auth.service';
-import { EngineService } from './core/services/engine.service';
+import { SessionStorageService } from './core/services/session-storage.service';
+import { EngineService } from './feature/game/services/engine.service';
 
 @Component({
   selector: "app-root",
@@ -11,8 +12,9 @@ import { EngineService } from './core/services/engine.service';
 export class AppComponent implements OnInit {
   constructor(
     private engineService: EngineService,
-    private authSvc: AuthService
-  ) {}
+    private authSvc: AuthService,
+    private sessionStrSvc: SessionStorageService
+  ) { }
 
   ngOnInit(): void {
     this.runWorker();

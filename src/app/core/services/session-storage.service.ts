@@ -16,4 +16,8 @@ export class SessionStorageService {
   getItem(key: string): string {
     return sessionStorage.getItem(key);
   }
+
+  clearStorage(): void {
+    sessionStorage.clear();
+  }
 }

@@ -12,7 +12,7 @@ export class EngineService {
   moveByEngineSubject = new Subject<string>();
   moveByEngine$ = this.moveByEngineSubject.asObservable();
 
-  constructor(private boardService: BoardService) {}
+  constructor(private boardService: BoardService) { }
 
   startEngine() {
     this.engineWorker = new Worker("stockfish", {

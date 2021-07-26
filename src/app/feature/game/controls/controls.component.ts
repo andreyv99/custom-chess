@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BoardService } from '../../../core/services/board.service';
-import { EngineService } from '../../../core/services/engine.service';
+import { BoardService } from '../services/board.service';
+import { EngineService } from '../services/engine.service';
 
 @Component({
   selector: "app-controls",
@@ -12,9 +12,9 @@ export class ControlsComponent implements OnInit {
   constructor(
     private boardService: BoardService,
     private engineService: EngineService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   refreshBoard(): void {
     this.engineService.refreshGame();
