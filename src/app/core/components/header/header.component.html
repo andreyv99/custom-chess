@@ -1,16 +1,17 @@
 <div class="header-button-row">
-  <a class="nav-link text-secondary"
-     aria-current="page"
-     href="">Custom Chess</a>
-  <button *ngIf="isNewUser$ | async; else profile"
-          mat-stroked-button
-          color="primary"
-          (click)="openDialog()">
+  <a class="nav-link text-secondary" aria-current="page" href=""
+    >Custom Chess</a
+  >
+  <button
+    *ngIf="isNewUser$ | async; else profile"
+    mat-stroked-button
+    color="primary"
+    (click)="openDialog()"
+  >
     Log In
   </button>
 </div>
 
 <ng-template #profile>
-  <button mat-stroked-button
-          color="primary">Profile</button>
+  <button mat-stroked-button color="primary">Profile</button>
 </ng-template>

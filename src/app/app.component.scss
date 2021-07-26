@@ -1,0 +1,31 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 75% 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 30px 30px;
+  grid-auto-flow: column;
+  grid-template-areas:
+    "header sidebar"
+    "main sidebar";
+  height: calc(100vh - 60px);
+}
+
+.header {
+  grid-area: header;
+}
+
+.main {
+  grid-area: main;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.custom-card {
+  padding: 15px;
+  background: #e1ffdcf2;
+  border-radius: 5px;
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+    0 1px 3px 0 rgb(0 0 0 / 12%);
+}
