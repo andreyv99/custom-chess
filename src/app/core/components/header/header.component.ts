@@ -18,7 +18,7 @@ export class HeaderComponent {
   openDialog() {
     const dialogRef = this.dialog.open(LogInComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
+
 }

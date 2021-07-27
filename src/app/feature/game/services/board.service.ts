@@ -23,7 +23,7 @@ export class BoardService {
   getCellsModel(): cellInterface[] {
     this.cellsModel = Array.apply(null, {
       length: this.cellAmount,
-    }).map((x, i) => this.getCellInfo(++i));
+    }).map((x, i) => this.getCellInfo(this.cellAmount - i));
 
     return this.cellsModel;
   }

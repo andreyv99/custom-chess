@@ -1,6 +1,7 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 
 import { BoardComponent } from './board/chess-board/board.component';
 import { ChessmenComponent } from './board/chessmen/chessmen.component';
@@ -16,7 +17,8 @@ import { GameZoneComponent } from './game-zone/game-zone.component';
   imports: [
     CommonModule,
     DragDropModule,
-    GameRoutingModule
+    GameRoutingModule,
+    MatButtonModule
   ]
 })
 export class GameModule { }
