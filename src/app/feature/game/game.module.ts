@@ -10,15 +10,12 @@ import { GameRoutingModule } from './game-routing.module';
 import { GameZoneComponent } from './game-zone/game-zone.component';
 
 @NgModule({
-  declarations: [BoardComponent,
+  declarations: [
+    BoardComponent,
     ChessmenComponent,
     GameZoneComponent,
-    ControlsComponent],
-  imports: [
-    CommonModule,
-    DragDropModule,
-    GameRoutingModule,
-    MatButtonModule
-  ]
+    ControlsComponent,
+  ],
+  imports: [CommonModule, DragDropModule, GameRoutingModule, MatButtonModule],
 })
-export class GameModule { }
+export class GameModule {}

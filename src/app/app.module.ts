@@ -1,5 +1,4 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -17,14 +16,16 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    MatDialogModule,
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: (sessionStrSvc: SessionStorageService) => () => sessionStrSvc.clearStorage(),
-    deps: [SessionStorageService],
-    multi: true
-  }],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (sessionStrSvc: SessionStorageService) => () =>
+        sessionStrSvc.clearStorage(),
+      deps: [SessionStorageService],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,8 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -15,12 +18,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    LogInComponent,
-    SignUpComponent,
-    SidebarComponent,
-  ],
   imports: [
     CommonModule,
     SharedModule,
@@ -29,9 +26,19 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     MatInputModule,
     MatIconModule,
     RouterModule,
-    MatStepperModule,
     MatCardModule,
+    MatDatepickerModule,
+    FormsModule,
+    MatDialogModule,
+    MatStepperModule,
+    MatNativeDateModule,
   ],
-  exports: [HeaderComponent, SidebarComponent],
+  declarations: [
+    HeaderComponent,
+    LogInComponent,
+    SignUpComponent,
+    SidebarComponent,
+  ],
+  exports: [HeaderComponent, SidebarComponent, SignUpComponent],
 })
 export class CoreModule {}

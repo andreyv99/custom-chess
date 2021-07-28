@@ -1,4 +1,49 @@
 <mat-card>
   <mat-card-title>Sign Up Form</mat-card-title>
-  <mat-card-content>lakf</mat-card-content>
+  <mat-card-content>
+    <mat-vertical-stepper [linear]="true" #stepper>
+      <form #signUpForm="ngForm" (ngSubmit)="onSubmit()">
+        <mat-step [stepControl]="signUpForm.controls.name">
+          <ng-template matStepLabel>Fill out your name</ng-template>
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input
+              matInput
+              placeholder="Last name, First name"
+              ngModel
+              name="name"
+              required
+            />
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step [stepControl]="signUpForm.controls.birthDate">
+          <ng-template matStepLabel>Fill out your Birth date</ng-template>
+          <mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" ngModel name="birthDate" />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button type="submit">Submit</button>
+          </div>
+        </mat-step>
+      </form>
+    </mat-vertical-stepper>
+  </mat-card-content>
 </mat-card>
