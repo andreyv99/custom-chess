@@ -15,7 +15,7 @@ export class EngineService {
   constructor(private boardService: BoardService) { }
 
   startEngine() {
-    this.engineWorker = new Worker("stockfish", {
+    this.engineWorker = new Worker(new URL('stockfish', import.meta.url), {
       type: "module",
     });
 
