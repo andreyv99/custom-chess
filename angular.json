@@ -22,6 +22,9 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "sourceMap": true,
+            "optimization": false,
+            "buildOptimizer": false,
             "customWebpackConfig": {
               "path": "./webpack.config.js",
               "replaceDuplicatePlugins": true
