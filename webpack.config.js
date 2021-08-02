@@ -1,10 +1,12 @@
 module.exports = {
-  node: {
-    fs: "empty",
-    readline: "empty",
-  },
   resolve: {
     extensions: [".wasm", ".mjs", ".js", ".json"],
+    fallback: {
+      fs: false,
+      readline: false,
+      path: false,
+      crypto: false,
+    },
   },
   target: "web",
 };
