@@ -8,6 +8,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { RouterModule } from '@angular/router';
 
@@ -32,6 +33,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     MatDialogModule,
     MatStepperModule,
     MatNativeDateModule,
+    MatSelectModule
   ],
   declarations: [
     HeaderComponent,
@@ -41,4 +43,4 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
   ],
   exports: [HeaderComponent, SidebarComponent, SignUpComponent],
 })
-export class CoreModule {}
+export class CoreModule { }

@@ -1,133 +1,202 @@
 <mat-card>
   <mat-card-title>Sign up Form</mat-card-title>
   <mat-card-content>
-    <form #signUpForm="ngForm" (ngSubmit)="onSubmit()">
-      <mat-vertical-stepper [linear]="true" #stepper>
-        <mat-step
-          class="pt-2"
-          ngModelGroup="name"
-          [stepControl]="signUpForm.controls.name"
-        >
+    <form #signUpForm="ngForm"
+          (ngSubmit)="onSubmit()">
+      <mat-vertical-stepper [linear]="true"
+                            #stepper>
+        <mat-step class="pt-2"
+                  ngModelGroup="name"
+                  [stepControl]="signUpForm.controls.name">
           <ng-template matStepLabel>Fill out your Name</ng-template>
           <mat-form-field appearance="fill">
             <mat-label>First Name</mat-label>
-            <input
-              matInput
-              placeholder="First name"
-              ngModel
-              name="firstName"
-              required
-            />
+            <input matInput
+                   placeholder="First name"
+                   ngModel
+                   name="firstName"
+                   required />
           </mat-form-field>
-          <mat-form-field class="mx-3" appearance="fill">
+          <mat-form-field class="mx-3"
+                          appearance="fill">
             <mat-label>Last Name</mat-label>
-            <input
-              matInput
-              placeholder="Last name"
-              ngModel
-              name="lastName"
-              required
-            />
+            <input matInput
+                   placeholder="Last name"
+                   ngModel
+                   name="lastName"
+                   required />
           </mat-form-field>
           <div>
-            <button mat-button type="button" matStepperNext>Next</button>
+            <button mat-button
+                    type="button"
+                    matStepperNext>Next</button>
           </div>
         </mat-step>
         <mat-step [stepControl]="signUpForm.controls.birthDate">
           <ng-template matStepLabel>Fill out your Birth date</ng-template>
           <mat-form-field appearance="fill">
             <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" ngModel name="birthDate" />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
+            <input matInput
+                   [matDatepicker]="picker"
+                   ngModel
+                   required
+                   name="birthDate" />
+            <mat-datepicker-toggle matSuffix
+                                   [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button type="button" matStepperNext>Next</button>
+            <button mat-button
+                    matStepperPrevious>Back</button>
+            <button mat-button
+                    type="button"
+                    matStepperNext>Next</button>
           </div>
         </mat-step>
-        <mat-step [stepControl]="signUpForm.controls.address">
+        <mat-step ngModelGroup="address"
+                  [stepControl]="signUpForm.controls.address">
           <ng-template matStepLabel>Fill out your Home address</ng-template>
           <mat-form-field appearance="fill">
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" ngModel name="address" />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-label>Choose country</mat-label>
+            <mat-select ngModel
+                        #countryCtrl="ngModel"
+                        required
+                        name="country">
+              <mat-option *ngFor="let country of countries"
+                          [value]="country">
+                {{country}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" ngModel name="address" />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+          <mat-form-field class="mx-3"
+                          appearance="fill">
+            <mat-label>Choose city</mat-label>
+            <mat-select ngModel
+                        name="city"
+                        required
+                        [disabled]="!countryCtrl.dirty">
+              <mat-option *ngFor="let country of cities$ | async"
+                          [value]="country">
+                {{country}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="mx-3"
+                          appearance="fill">
+            <mat-label>Enter postal code</mat-label>
+            <input matInput
+                   placeholder="Postal Code"
+                   ngModel
+                   #postalCodeCtrl="ngModel"
+                   type="number"
+                   name="postalCode"
+                   min="0"
+                   required />
+            <mat-error *ngIf="postalCodeCtrl.errors">
+              Please enter a valid Postal code
+            </mat-error>
           </mat-form-field>
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button type="button" matStepperNext>Next</button>
+            <button mat-button
+                    matStepperPrevious>Back</button>
+            <button mat-button
+                    type="button"
+                    matStepperNext>Next</button>
           </div>
         </mat-step>
-        <mat-step [stepControl]="signUpForm.controls.birthDate">
-          <ng-template matStepLabel>Fill out your Birth date</ng-template>
+        <mat-step class="pt-2"
+                  [stepControl]="signUpForm.controls.email">
+          <ng-template matStepLabel>Fill out your email</ng-template>
           <mat-form-field appearance="fill">
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" ngModel name="birthDate" />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-label>email</mat-label>
+            <input matInput
+                   placeholder="email"
+                   ngModel
+                   type="email"
+                   name="email"
+                   required />
           </mat-form-field>
+
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button type="button" matStepperNext>Next</button>
+            <button mat-button
+                    matStepperPrevious>Back</button>
+            <button mat-button
+                    type="button"
+                    matStepperNext>Next</button>
           </div>
         </mat-step>
-        <mat-step [stepControl]="signUpForm.controls.birthDate">
-          <ng-template matStepLabel>Fill out your Birth date</ng-template>
+        <mat-step class="pt-2"
+                  [stepControl]="signUpForm.controls.number">
+          <ng-template matStepLabel>Fill out your phone number</ng-template>
           <mat-form-field appearance="fill">
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" ngModel name="birthDate" />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-label>Phone number</mat-label>
+            <input matInput
+                   placeholder="number"
+                   ngModel
+                   type="number"
+                   name="number"
+                   required />
           </mat-form-field>
+
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button type="button" matStepperNext>Next</button>
+            <button mat-button
+                    matStepperPrevious>Back</button>
+            <button mat-button
+                    type="button"
+                    matStepperNext>Next</button>
           </div>
         </mat-step>
-        <mat-step [stepControl]="signUpForm.controls.birthDate">
-          <ng-template matStepLabel>Fill out your Birth date</ng-template>
+        <mat-step class="pt-2"
+                  [stepControl]="signUpForm.controls.username">
+          <ng-template matStepLabel>Create your username</ng-template>
           <mat-form-field appearance="fill">
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" ngModel name="birthDate" />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-label>Username</mat-label>
+            <input matInput
+                   placeholder="username"
+                   ngModel
+                   type="text"
+                   name="username"
+                   required />
           </mat-form-field>
+
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button type="button" matStepperNext>Next</button>
+            <button mat-button
+                    matStepperPrevious>Back</button>
+            <button mat-button
+                    type="button"
+                    matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step class="pt-2"
+                  [stepControl]="signUpForm.controls.password">
+          <ng-template matStepLabel>Create your password</ng-template>
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput
+                   placeholder="password"
+                   ngModel
+                   type="text"
+                   name="password"
+                   required />
+          </mat-form-field>
+
+          <div>
+            <button mat-button
+                    matStepperPrevious>Back</button>
+            <button mat-button
+                    type="button"
+                    matStepperNext>Next</button>
           </div>
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>Done</ng-template>
           <p>You are now done.</p>
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-raised-button color="primary" type="submit">
+            <button mat-button
+                    matStepperPrevious>Back</button>
+            <button mat-raised-button
+                    color="primary"
+                    type="submit">
               Submit
             </button>
           </div>
