@@ -32,27 +32,6 @@
                     matStepperNext>Next</button>
           </div>
         </mat-step>
-        <mat-step [stepControl]="signUpForm.controls.birthDate">
-          <ng-template matStepLabel>Fill out your Birth date</ng-template>
-          <mat-form-field appearance="fill">
-            <mat-label>Choose a date</mat-label>
-            <input matInput
-                   [matDatepicker]="picker"
-                   ngModel
-                   required
-                   name="birthDate" />
-            <mat-datepicker-toggle matSuffix
-                                   [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          <div>
-            <button mat-button
-                    matStepperPrevious>Back</button>
-            <button mat-button
-                    type="button"
-                    matStepperNext>Next</button>
-          </div>
-        </mat-step>
         <mat-step ngModelGroup="address"
                   [stepControl]="signUpForm.controls.address">
           <ng-template matStepLabel>Fill out your Home address</ng-template>
@@ -154,9 +133,14 @@
             <input matInput
                    placeholder="username"
                    ngModel
+                   #userNameCtrl="ngModel"
                    type="text"
+                   asyncUserNameValidator
                    name="username"
                    required />
+            <mat-error *ngIf="userNameCtrl.errors?.error1">
+              {{userNameCtrl.errors.error1.value}}
+            </mat-error>
           </mat-form-field>
 
           <div>
@@ -196,6 +180,7 @@
                     matStepperPrevious>Back</button>
             <button mat-raised-button
                     color="primary"
+                    [disabled]="signUpForm.invalid"
                     type="submit">
               Submit
             </button>

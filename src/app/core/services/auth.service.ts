@@ -7,16 +7,11 @@ import { SessionStorageService } from './session-storage.service';
 import { UserService } from './user.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthService {
-  adminFakeUserName: storageInterface = {
-    key: "userName",
-    value: "admin",
-  };
-
-  adminFakeUserPassword: storageInterface = {
-    key: "password",
+  adminFakeUser: storageInterface = {
+    key: "admin",
     value: "admin",
   };
 
@@ -24,25 +19,22 @@ export class AuthService {
     private localStorageSvc: LocalStorageService,
     private sessionStorageSvc: SessionStorageService,
     private userSvc: UserService
-  ) {}
+  ) { }
 
   registerAdminFakeUser() {
-    this.localStorageSvc.putItem(this.adminFakeUserName);
-    this.localStorageSvc.putItem(this.adminFakeUserPassword);
+    this.localStorageSvc.putItem(this.adminFakeUser.key, this.adminFakeUser.value);
   }
 
-  logInUser(user: logInInterface): boolean {
-    let a = this.userSvc.checkIfUserIsKnown(user);
-    if (a) this.registerUserInSessionStorage(user);
-    let ifUserIsRegistered = this.userSvc.getUserRecognizedStatus();
-    this.userSvc.isNewUserStatusSubject.next(ifUserIsRegistered);
+  logInUser(userCreds: logInInterface): boolean {
+    if (this.userSvc.checkIfUserIsKnown(userCreds)) { this.registerUserInSessionStorage(userCreds); }
+    const ifUserIsRegistered = this.userSvc.getUserRecognizedStatus(userCreds);
+    this.userSvc.isNewUserStatusSubject.next(!ifUserIsRegistered);
     this.userSvc.userRecognizingErrorSubject.next(!ifUserIsRegistered);
 
     return ifUserIsRegistered;
   }
 
-  registerUserInSessionStorage(user: logInInterface): void {
-    this.sessionStorageSvc.putItem({ key: "userName", value: user.userName });
-    this.sessionStorageSvc.putItem({ key: "password", value: user.password });
+  registerUserInSessionStorage(userCreds: logInInterface): void {
+    this.sessionStorageSvc.putItem(userCreds.userName, userCreds.password);
   }
 }

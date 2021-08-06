@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { storageInterface } from '../models/local-storage-item.model';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -9,8 +7,8 @@ export class SessionStorageService {
 
   constructor() { }
 
-  putItem(item: storageInterface) {
-    sessionStorage.setItem(item.key, item.value);
+  putItem(key: string, value: string) {
+    sessionStorage.setItem(key, value);
   }
 
   getItem(key: string): string {

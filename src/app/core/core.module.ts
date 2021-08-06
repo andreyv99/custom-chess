@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { RouterModule } from '@angular/router';
 
@@ -17,6 +18,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { UsernameValidatorDirective } from './components/sign-up/username-validator.directive';
 
 @NgModule({
   imports: [
@@ -33,13 +35,15 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     MatDialogModule,
     MatStepperModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
   ],
   declarations: [
     HeaderComponent,
     LogInComponent,
     SignUpComponent,
     SidebarComponent,
+    UsernameValidatorDirective,
   ],
   exports: [HeaderComponent, SidebarComponent, SignUpComponent],
 })

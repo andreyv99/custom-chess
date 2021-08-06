@@ -1,6 +1,11 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { NotificationsService } from 'src/app/shared/services/notifications.service';
+
+import { SignUpService } from '../../services/sign-up.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -22,7 +27,7 @@ export class SignUpComponent implements AfterViewInit {
   citiesSubject = new Subject();
   cities$ = this.citiesSubject.asObservable();
 
-  constructor() { }
+  constructor(private signUpService: SignUpService, private snackBar: MatSnackBar, private router: Router, private notificationsSvc: NotificationsService) { }
 
   ngAfterViewInit() {
     this.countryCtrl.valueChanges.subscribe(value => {
@@ -31,6 +36,11 @@ export class SignUpComponent implements AfterViewInit {
   }
 
   onSubmit() {
-    console.log(this.signUpForm.value);
+    this.signUpService.signUpUser(this.signUpForm.value)
+    this.notificationsSvc.showNotification('You\'ve successfully signed up', 'cool', 1500, 'success-notification')
+
+    setTimeout(() => {
+      this.router.navigate(['../'])
+    }, 1500)
   }
 }

@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { storageInterface } from '../models/local-storage-item.model';
-
 @Injectable({
   providedIn: "root",
 })
 export class LocalStorageService {
   constructor() { }
 
-  putItem(item: storageInterface) {
-    localStorage.setItem(item.key, item.value);
+  putItem(key: string, value: string) {
+    localStorage.setItem(key, value);
   }
 
   getItem(key: string): string {
