@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { RoutePath } from 'src/app/shared/enums/route-path.enum';
 import { NotificationsService } from 'src/app/shared/services/notifications.service';
 
@@ -15,7 +16,7 @@ import { UserService } from '../../services/user.service';
 export class LogInComponent {
   logInForm = new FormGroup({
     userName: new FormControl(null, Validators.required),
-    password: new FormControl(null, Validators.required)
+    password: new FormControl(null, Validators.required),
   });
 
   routePath = RoutePath;
@@ -26,13 +27,22 @@ export class LogInComponent {
     private authSvc: AuthService,
     public dialogRef: MatDialogRef<LogInComponent>,
     private userSvc: UserService,
-    private notificationsSvc: NotificationsService
-  ) { }
+    private notificationsSvc: NotificationsService,
+    private router: Router
+  ) {}
 
   onSubmit() {
     if (this.authSvc.logInUser(this.logInForm.value)) {
       this.closeDialog();
-      this.notificationsSvc.showNotification('You\'ve successfully logged in', 'super', 1500, 'success-notification')
+      this.notificationsSvc.showNotification(
+        "You've successfully logged in",
+        "super",
+        1500,
+        "success-notification"
+      );
+      if (this.router.url.includes(this.routePath.signUp)) {
+        this.router.navigateByUrl("");
+      }
     }
   }
 

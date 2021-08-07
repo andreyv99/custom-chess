@@ -10,8 +10,23 @@
   >
     Log In
   </button>
+  <span class="divider"></span>
+  <span class="welcome-message" *ngIf="user$ | async as user"
+    >Hi
+    <a
+      class="profile-link"
+      [routerLink]="[routePath.settings, routePath.profile]"
+      >{{ user.name.firstName }}</a
+    >, let's play!</span
+  >
 </div>
 
 <ng-template #profile>
-  <button mat-stroked-button color="primary">Profile</button>
+  <button
+    mat-stroked-button
+    color="primary"
+    [routerLink]="[routePath.settings]"
+  >
+    Settings
+  </button>
 </ng-template>

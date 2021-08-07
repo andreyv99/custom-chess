@@ -1,0 +1,12 @@
+<ng-container *ngIf="user$ | async as user">
+  <img
+    width="100%"
+    src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
+    alt=""
+    class="user-picture"
+  />
+  <p>{{ user.name.firstName }} {{ user.name.lastName }}</p>
+  <small>{{ user.userName }}</small>
+  <p>{{ user.address.country }} {{ user.address.city }}</p>
+  <p>{{ user.email }}</p>
+</ng-container>

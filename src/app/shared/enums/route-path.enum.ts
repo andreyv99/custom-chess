@@ -1,3 +1,5 @@
 export enum RoutePath {
-  signUp = 'sign-up'
+  signUp = "sign-up",
+  profile = "profile",
+  settings = "settings",
 }

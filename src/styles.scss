@@ -26,3 +26,11 @@ body {
 .success-notification .mat-button {
   color: rgb(24, 243, 108);
 }
+
+.mat-card {
+  background: transparent;
+}
+.mat-stepper-horizontal,
+.mat-stepper-vertical {
+  background-color: transparent;
+}

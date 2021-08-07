@@ -7,7 +7,7 @@ import { SessionStorageService } from './session-storage.service';
 import { UserService } from './user.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   adminFakeUser: storageInterface = {
@@ -19,17 +19,23 @@ export class AuthService {
     private localStorageSvc: LocalStorageService,
     private sessionStorageSvc: SessionStorageService,
     private userSvc: UserService
-  ) { }
+  ) {}
 
   registerAdminFakeUser() {
-    this.localStorageSvc.putItem(this.adminFakeUser.key, this.adminFakeUser.value);
+    this.localStorageSvc.putItem(
+      this.adminFakeUser.key,
+      this.adminFakeUser.value
+    );
   }
 
   logInUser(userCreds: logInInterface): boolean {
-    if (this.userSvc.checkIfUserIsKnown(userCreds)) { this.registerUserInSessionStorage(userCreds); }
+    if (this.userSvc.checkIfUserIsKnown(userCreds)) {
+      this.registerUserInSessionStorage(userCreds);
+    }
     const ifUserIsRegistered = this.userSvc.getUserRecognizedStatus(userCreds);
     this.userSvc.isNewUserStatusSubject.next(!ifUserIsRegistered);
     this.userSvc.userRecognizingErrorSubject.next(!ifUserIsRegistered);
+    this.userSvc.userSubject.next(this.userSvc.getUser(userCreds.userName));
 
     return ifUserIsRegistered;
   }

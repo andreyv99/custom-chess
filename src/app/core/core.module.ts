@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { HeaderComponent } from './components/header/header.component';
 import { LogInComponent } from './components/log-in/log-in.component';
+import { ConsoleDuplicateComponent } from './components/sidebar/console-duplicate/console-duplicate.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { UsernameValidatorDirective } from './components/sign-up/username-validator.directive';
@@ -36,7 +37,7 @@ import { UsernameValidatorDirective } from './components/sign-up/username-valida
     MatStepperModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   declarations: [
     HeaderComponent,
@@ -44,7 +45,8 @@ import { UsernameValidatorDirective } from './components/sign-up/username-valida
     SignUpComponent,
     SidebarComponent,
     UsernameValidatorDirective,
+    ConsoleDuplicateComponent,
   ],
   exports: [HeaderComponent, SidebarComponent, SignUpComponent],
 })
-export class CoreModule { }
+export class CoreModule {}
