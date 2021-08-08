@@ -5,15 +5,16 @@ import { LocalStorageService } from './local-storage.service';
 import { SessionStorageService } from './session-storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class SignUpService {
-
-  constructor(private localStorageSvc: LocalStorageService,
-    private sessionStorageSvc: SessionStorageService) { }
+  constructor(
+    private localStorageSvc: LocalStorageService,
+    private sessionStorageSvc: SessionStorageService
+  ) {}
 
   signUpUser(user: userInterface) {
-    this.localStorageSvc.putItem(`user-${user.username}`, JSON.stringify(user))
-    this.localStorageSvc.putItem(user.username, user.password)
+    this.localStorageSvc.putItem(`user-${user.userName}`, JSON.stringify(user));
+    this.localStorageSvc.putItem(user.userName, user.password);
   }
 }

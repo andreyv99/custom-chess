@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { RoutePath } from 'src/app/shared/enums/route-path.enum';
 import { NotificationsService } from 'src/app/shared/services/notifications.service';
 
+import { UserFormControlNameEnum } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 
@@ -15,10 +16,17 @@ import { UserService } from '../../services/user.service';
 })
 export class LogInComponent {
   logInForm = new FormGroup({
-    userName: new FormControl(null, Validators.required),
-    password: new FormControl(null, Validators.required),
+    [UserFormControlNameEnum.userName]: new FormControl(
+      null,
+      Validators.required
+    ),
+    [UserFormControlNameEnum.password]: new FormControl(
+      null,
+      Validators.required
+    ),
   });
 
+  userFormControlNameEnum = UserFormControlNameEnum;
   routePath = RoutePath;
 
   userRecognizingError$ = this.userSvc.userRecognizingError$;

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { NotificationsService } from 'src/app/shared/services/notifications.service';
 
+import { UserFormControlNameEnum } from '../../models/user.model';
 import { SignUpService } from '../../services/sign-up.service';
 
 @Component({
@@ -15,6 +16,8 @@ import { SignUpService } from '../../services/sign-up.service';
 export class SignUpComponent implements AfterViewInit {
   @ViewChild(NgForm) signUpForm: NgForm;
   @ViewChild("countryCtrl", { static: true }) countryCtrl: NgModel;
+
+  userFormControlNameEnum = UserFormControlNameEnum;
 
   countries = ["Ukraine", "USA", "Germany", "Russia"];
 
@@ -40,7 +43,10 @@ export class SignUpComponent implements AfterViewInit {
   }
 
   onSubmit() {
-    this.signUpService.signUpUser(this.signUpForm.value);
+    this.signUpService.signUpUser({
+      ...this.signUpForm.value,
+      profileIsFull: false,
+    });
     this.notificationsSvc.showNotification(
       "You've successfully signed up",
       "cool",
@@ -51,8 +57,5 @@ export class SignUpComponent implements AfterViewInit {
     setTimeout(() => {
       this.router.navigate(["../"]);
     }, 1500);
-  }
-  a(a) {
-    console.log(a);
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { shareReplay, tap } from 'rxjs/operators';
 
 import { logInInterface } from '../models/log-in.model';
 import { userInterface } from '../models/user.model';
@@ -18,7 +18,10 @@ export class UserService {
   userRecognizingError$ = this.userRecognizingErrorSubject.asObservable();
 
   userSubject = new Subject<userInterface>();
-  user$ = this.userSubject.asObservable().pipe(shareReplay());
+  user$ = this.userSubject.asObservable().pipe(
+    shareReplay(),
+    tap((x) => console.log(x))
+  );
 
   constructor(
     private localStorageSvc: LocalStorageService,

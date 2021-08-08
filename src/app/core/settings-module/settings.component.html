@@ -1,24 +1,46 @@
 <div class="row m-0">
   <mat-card class="col-3">
-    <mat-card-content><app-user-overview></app-user-overview></mat-card-content>
+    <mat-card-content>
+      <app-user-overview></app-user-overview>
+    </mat-card-content>
   </mat-card>
   <mat-card class="ms-3 col">
     <mat-card-content>
       <mat-tab-group>
-        <mat-tab
-          ><ng-template mat-tab-label>
+        <mat-tab>
+          <ng-template mat-tab-label>
             <mat-icon>person_outline</mat-icon>
-            <span class="tab-label">Profile</span>
+            <ng-container *ngIf="userProfileIsFull$ | async; else elseBlock">
+              <span
+                class="tab-label"
+                matBadge="!"
+                matBadgeSize="small"
+                matBadgeColor="warn"
+                color="primary"
+                >Profile</span
+              >
+            </ng-container>
+            <ng-template #elseBlock>
+              <span
+                class="tab-label"
+                matBadge="!"
+                matBadgeSize="small"
+                matBadgeColor="warn"
+                color="primary"
+                >Profile</span
+              >
+            </ng-template>
           </ng-template>
           <app-profile></app-profile>
         </mat-tab>
-        <mat-tab
-          ><ng-template mat-tab-label>
+        <mat-tab>
+          <ng-template mat-tab-label>
             <mat-icon>settings</mat-icon>
             <span class="tab-label">Game</span>
           </ng-template>
           <app-game></app-game>
-        </mat-tab> </mat-tab-group
-    ></mat-card-content>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
   </mat-card>
 </div>

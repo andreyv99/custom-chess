@@ -21,9 +21,13 @@
   >
 </div>
 
-<ng-template #profile>
+<ng-template #profile let-user>
   <button
     mat-stroked-button
+    [matBadgeHidden]="user.profileIsFull"
+    matBadge="!"
+    matBadgeSize="small"
+    matBadgeColor="warn"
     color="primary"
     [routerLink]="[routePath.settings]"
   >

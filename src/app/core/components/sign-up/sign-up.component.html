@@ -5,7 +5,7 @@
       <mat-vertical-stepper [linear]="true" #stepper>
         <mat-step
           class="pt-2"
-          ngModelGroup="name"
+          ngModelGroup="userFormControlNameEnum.name"
           [stepControl]="signUpForm.controls.name"
         >
           <ng-template matStepLabel>Fill out your Name</ng-template>
@@ -15,7 +15,7 @@
               matInput
               placeholder="First name"
               ngModel
-              name="firstName"
+              name="userFormControlNameEnum.firstName"
               required
             />
           </mat-form-field>
@@ -25,7 +25,7 @@
               matInput
               placeholder="Last name"
               ngModel
-              name="lastName"
+              name="userFormControlNameEnum.lastName"
               required
             />
           </mat-form-field>
@@ -40,7 +40,12 @@
           <ng-template matStepLabel>Fill out your Home address</ng-template>
           <mat-form-field appearance="fill">
             <mat-label>Choose country</mat-label>
-            <mat-select ngModel #countryCtrl="ngModel" required name="country">
+            <mat-select
+              ngModel
+              #countryCtrl="ngModel"
+              required
+              name="userFormControlNameEnum.country"
+            >
               <mat-option *ngFor="let country of countries" [value]="country">
                 {{ country }}
               </mat-option>
@@ -50,7 +55,7 @@
             <mat-label>Choose city</mat-label>
             <mat-select
               ngModel
-              name="city"
+              name="userFormControlNameEnum.city"
               required
               [disabled]="!countryCtrl.dirty"
             >
@@ -70,7 +75,7 @@
               ngModel
               #postalCodeCtrl="ngModel"
               type="number"
-              name="postalCode"
+              name="userFormControlNameEnum.postalCode"
               min="0"
               required
             />
@@ -92,7 +97,7 @@
               placeholder="email"
               ngModel
               type="email"
-              name="email"
+              name="userFormControlNameEnum.email"
               required
             />
           </mat-form-field>
@@ -111,7 +116,7 @@
               placeholder="number"
               ngModel
               type="number"
-              name="number"
+              name="userFormControlNameEnum.number"
               required
             />
           </mat-form-field>
@@ -121,7 +126,7 @@
             <button mat-button type="button" matStepperNext>Next</button>
           </div>
         </mat-step>
-        <mat-step class="pt-2" [stepControl]="signUpForm.controls.username">
+        <mat-step class="pt-2" [stepControl]="signUpForm.controls.userName">
           <ng-template matStepLabel>Create your username</ng-template>
           <mat-form-field appearance="fill">
             <mat-label>Username</mat-label>
@@ -132,7 +137,7 @@
               #userNameCtrl="ngModel"
               type="text"
               asyncUserNameValidator
-              name="username"
+              name="userFormControlNameEnum.userName"
               required
             />
             <mat-error *ngIf="userNameCtrl.errors?.error1">
@@ -156,7 +161,7 @@
               ngModel
               minlength="8"
               type="text"
-              name="password"
+              name="userFormControlNameEnum.password"
               required
             />
             <mat-error *ngIf="passwordCtrl.errors?.required">

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -38,6 +39,7 @@ import { UsernameValidatorDirective } from './components/sign-up/username-valida
     MatNativeDateModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatBadgeModule,
   ],
   declarations: [
     HeaderComponent,

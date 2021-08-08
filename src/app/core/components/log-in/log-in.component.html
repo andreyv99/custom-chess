@@ -2,7 +2,11 @@
   <div>
     <mat-form-field appearance="outline">
       <mat-label>Enter your username</mat-label>
-      <input matInput placeholder="Andrey" formControlName="userName" />
+      <input
+        matInput
+        placeholder="Andrey"
+        [formControlName]="userFormControlNameEnum.userName"
+      />
       <mat-hint>your username or nickname</mat-hint>
     </mat-form-field>
   </div>
@@ -13,7 +17,7 @@
         matInput
         placeholder="*****"
         type="password"
-        formControlName="password"
+        [formControlName]="userFormControlNameEnum.password"
       />
     </mat-form-field>
     <div class="position-absolute">

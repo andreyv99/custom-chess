@@ -1,3 +1,29 @@
 .user-picture {
   border-radius: 50%;
+  border: 0.5px solid rgb(148, 148, 148);
+}
+
+.name {
+  font-size: 30px;
+  color: #3f51b5;
+  margin-top: 10px;
+  margin-bottom: 0;
+  line-height: 30px;
+  text-transform: capitalize;
+  font-family: "Sans Pro Bold";
+}
+
+.username {
+  font-size: 20px;
+  font-family: "Sans Pro LIght";
+  color: rgb(133, 133, 133);
+}
+
+.email {
+  font-size: 22px;
+  line-height: 25px;
+  margin-top: 10px;
+}
+.mat-icon {
+  vertical-align: bottom;
 }
