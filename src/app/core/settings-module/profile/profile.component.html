@@ -1,14 +1,29 @@
-<form *ngIf="user$ | async" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label"
-      >Email address</label
-    >
-    <input
-      type="email"
-      class="form-control"
-      id="exampleFormControlInput1"
-      placeholder="name@example.com"
-      [formControlName]="userFormControlNameEnum.name"
-    />
+<form *ngIf="user$ | async as user" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <p *ngIf="!user.profileIsFull" class="text-danger">
+    You have blank fields! Please fill out your profile.
+  </p>
+  <div class="mb-3" [formGroup]="userFormControlNameEnum.name">
+    <!-- <div class="group">
+      <input
+        type="text"
+        placeholder="Andrew"
+        [formControlName]="userFormControlNameEnum.firstName"
+      />
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Name</label>
+    </div>
+    <div class="group">
+      <input
+        type="text"
+        placeholder="Voronov"
+        [formControlName]="userFormControlNameEnum.lastName"
+      />
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>surName</label>
+
+      
+    </div> -->
   </div>
 </form>

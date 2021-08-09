@@ -5,7 +5,7 @@
       <mat-vertical-stepper [linear]="true" #stepper>
         <mat-step
           class="pt-2"
-          ngModelGroup="userFormControlNameEnum.name"
+          [ngModelGroup]="userFormControlNameEnum.name"
           [stepControl]="signUpForm.controls.name"
         >
           <ng-template matStepLabel>Fill out your Name</ng-template>
@@ -34,7 +34,7 @@
           </div>
         </mat-step>
         <mat-step
-          ngModelGroup="address"
+          [ngModelGroup]="userFormControlNameEnum.address"
           [stepControl]="signUpForm.controls.address"
         >
           <ng-template matStepLabel>Fill out your Home address</ng-template>

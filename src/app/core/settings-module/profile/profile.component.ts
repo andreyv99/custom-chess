@@ -25,7 +25,20 @@ export class ProfileComponent implements OnInit {
 
   buildForm(user: userInterface): void {
     this.form = this.fb.group({
-      [this.userFormControlNameEnum.name]: user.name.firstName,
+      [this.userFormControlNameEnum.name]: this.fb.group({
+        [this.userFormControlNameEnum.firstName]: user.name.firstName,
+        [this.userFormControlNameEnum.lastName]: user.name.firstName,
+      }),
+      [this.userFormControlNameEnum.address]: this.fb.group({
+        [this.userFormControlNameEnum.country]: user.address.country,
+        [this.userFormControlNameEnum.city]: user.address.city,
+        [this.userFormControlNameEnum.postalCode]: user.address.postalCode,
+      }),
+      [this.userFormControlNameEnum.email]: user.email,
+      [this.userFormControlNameEnum.number]: user.userName,
+      [this.userFormControlNameEnum.password]: user.password,
+      [this.userFormControlNameEnum.birthDate]: user.birthDate,
+      [this.userFormControlNameEnum.gameLevel]: user.gameLevel,
     });
   }
 
