@@ -40,6 +40,7 @@ export class ProfileComponent implements OnInit {
       [this.userFormControlNameEnum.birthDate]: user.birthDate,
       [this.userFormControlNameEnum.gameLevel]: user.gameLevel,
     });
+    console.log(this.form, 234);
   }
 
   onSubmit() {

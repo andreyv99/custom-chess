@@ -2,8 +2,8 @@
   <p *ngIf="!user.profileIsFull" class="text-danger">
     You have blank fields! Please fill out your profile.
   </p>
-  <div class="mb-3" [formGroup]="userFormControlNameEnum.name">
-    <!-- <div class="group">
+  <div class="mb-3" [formGroupName]="userFormControlNameEnum.name">
+    <div class="group">
       <input
         type="text"
         placeholder="Andrew"
@@ -22,8 +22,6 @@
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>surName</label>
-
-      
-    </div> -->
+    </div>
   </div>
 </form>

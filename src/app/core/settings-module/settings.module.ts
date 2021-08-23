@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -27,6 +27,7 @@ import { UserOverviewComponent } from './user-overview/user-overview.component';
     MatCardModule,
     MatBadgeModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
 })
 export class SettingsModule {}
