@@ -15,7 +15,7 @@
               matInput
               placeholder="First name"
               ngModel
-              name="userFormControlNameEnum.firstName"
+              [name]="userFormControlNameEnum.firstName"
               required
             />
           </mat-form-field>
@@ -25,7 +25,7 @@
               matInput
               placeholder="Last name"
               ngModel
-              name="userFormControlNameEnum.lastName"
+              [name]="userFormControlNameEnum.lastName"
               required
             />
           </mat-form-field>
@@ -44,7 +44,7 @@
               ngModel
               #countryCtrl="ngModel"
               required
-              name="userFormControlNameEnum.country"
+              [name]="userFormControlNameEnum.country"
             >
               <mat-option *ngFor="let country of countries" [value]="country">
                 {{ country }}
@@ -55,7 +55,7 @@
             <mat-label>Choose city</mat-label>
             <mat-select
               ngModel
-              name="userFormControlNameEnum.city"
+              [name]="userFormControlNameEnum.city"
               required
               [disabled]="!countryCtrl.dirty"
             >
@@ -75,7 +75,7 @@
               ngModel
               #postalCodeCtrl="ngModel"
               type="number"
-              name="userFormControlNameEnum.postalCode"
+              [name]="userFormControlNameEnum.postalCode"
               min="0"
               required
             />
@@ -97,7 +97,7 @@
               placeholder="email"
               ngModel
               type="email"
-              name="userFormControlNameEnum.email"
+              [name]="userFormControlNameEnum.email"
               required
             />
           </mat-form-field>
@@ -116,7 +116,7 @@
               placeholder="number"
               ngModel
               type="number"
-              name="userFormControlNameEnum.number"
+              [name]="userFormControlNameEnum.number"
               required
             />
           </mat-form-field>
@@ -137,7 +137,7 @@
               #userNameCtrl="ngModel"
               type="text"
               asyncUserNameValidator
-              name="userFormControlNameEnum.userName"
+              [name]="userFormControlNameEnum.userName"
               required
             />
             <mat-error *ngIf="userNameCtrl.errors?.error1">
@@ -161,7 +161,7 @@
               ngModel
               minlength="8"
               type="text"
-              name="userFormControlNameEnum.password"
+              [name]="userFormControlNameEnum.password"
               required
             />
             <mat-error *ngIf="passwordCtrl.errors?.required">

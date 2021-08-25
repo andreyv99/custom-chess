@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { GameComponent } from './game/game.component';
@@ -25,9 +27,11 @@ import { UserOverviewComponent } from './user-overview/user-overview.component';
     MatTabsModule,
     MatIconModule,
     MatCardModule,
+    MatInputModule,
     MatBadgeModule,
     ReactiveFormsModule,
     FormsModule,
+    MatSelectModule,
   ],
 })
 export class SettingsModule {}

@@ -2,6 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ViewChild } from '@a
 import { NgForm, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { Cities, Countries } from 'src/app/shared/hardcode/address';
 import { NotificationsService } from 'src/app/shared/services/notifications.service';
 
 import { UserFormControlNameEnum } from '../../models/user.model';
@@ -19,14 +20,9 @@ export class SignUpComponent implements AfterViewInit {
 
   userFormControlNameEnum = UserFormControlNameEnum;
 
-  countries = ["Ukraine", "USA", "Germany", "Russia"];
+  countries = Countries;
+  citiesModel = Cities;
 
-  citiesModel = {
-    Ukraine: ["Kiev", "Kharkov", "Lviv", "Odessa"],
-    USA: ["Chicago", "New York", "Miami", "Atlanta"],
-    Germany: ["Berlin", "Dortmund", "Bonn", "Cologne"],
-    Russia: ["Moscow", "Sochi", "Krasnodar", "Surgut"],
-  };
   citiesSubject = new Subject();
   cities$ = this.citiesSubject.asObservable();
 

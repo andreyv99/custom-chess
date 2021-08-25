@@ -1,27 +1,56 @@
 <form *ngIf="user$ | async as user" [formGroup]="form" (ngSubmit)="onSubmit()">
   <p *ngIf="!user.profileIsFull" class="text-danger">
-    You have blank fields! Please fill out your profile.
+    You have empty fields! Please fill out your profile.
   </p>
   <div class="mb-3" [formGroupName]="userFormControlNameEnum.name">
-    <div class="group">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>First Name</mat-label>
       <input
+        matInput
+        [errorStateMatcher]="errorMatcher"
         type="text"
         placeholder="Andrew"
         [formControlName]="userFormControlNameEnum.firstName"
       />
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label>Name</label>
-    </div>
-    <div class="group">
+    </mat-form-field>
+    <mat-form-field class="example-full-width mx-3" appearance="fill">
+      <mat-label>Surname</mat-label>
       <input
+        matInput
         type="text"
         placeholder="Voronov"
         [formControlName]="userFormControlNameEnum.lastName"
       />
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label>surName</label>
-    </div>
+    </mat-form-field>
+  </div>
+  <div class="mb-3" [formGroupName]="userFormControlNameEnum.address">
+    <mat-form-field appearance="fill">
+      <mat-label>Choose country</mat-label>
+      <mat-select [formControlName]="userFormControlNameEnum.country">
+        <mat-option *ngFor="let country of countries" [value]="country">
+          {{ country }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="mx-3" appearance="fill">
+      <mat-label>Choose city</mat-label>
+      <mat-select [formControlName]="userFormControlNameEnum.city">
+        <mat-option *ngFor="let city of cities$ | async" [value]="city">
+          {{ city }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="mx-3" appearance="fill">
+      <mat-label>Enter postal code</mat-label>
+      <input
+        matInput
+        placeholder="Postal Code"
+        type="number"
+        [formControlName]="userFormControlNameEnum.postalCode"
+      />
+      <!-- <mat-error *ngIf="postalCodeCtrl.errors">
+        Please enter a valid Postal code
+      </mat-error> -->
+    </mat-form-field>
   </div>
 </form>
