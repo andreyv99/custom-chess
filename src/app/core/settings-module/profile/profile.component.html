@@ -48,9 +48,22 @@
         type="number"
         [formControlName]="userFormControlNameEnum.postalCode"
       />
-      <!-- <mat-error *ngIf="postalCodeCtrl.errors">
+      <mat-error
+        *ngIf="
+          form.get([
+            userFormControlNameEnum.address,
+            userFormControlNameEnum.postalCode
+          ]).errors
+        "
+      >
         Please enter a valid Postal code
-      </mat-error> -->
+      </mat-error>
     </mat-form-field>
+    {{
+      form.get([
+        userFormControlNameEnum.address,
+        userFormControlNameEnum.postalCode
+      ]).value | json
+    }}
   </div>
 </form>

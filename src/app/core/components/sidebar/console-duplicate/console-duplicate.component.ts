@@ -9,14 +9,14 @@ export class ConsoleDuplicateComponent implements OnInit {
   logs = [];
   constructor() {}
   ngOnInit(): void {
-    console.log = (...args) => {
-      this.logs.unshift(JSON.stringify(args));
-    };
-    console.warn = (...args) => {
-      this.logs.unshift(JSON.stringify(args));
-    };
-    console.error = (...args) => {
-      this.logs.unshift(args);
-    };
+    // console.log = (...args) => {
+    //   this.logs.unshift(JSON.stringify(args));
+    // };
+    // console.warn = (...args) => {
+    //   this.logs.unshift(JSON.stringify(args));
+    // };
+    // console.error = (...args) => {
+    //   this.logs.unshift(args);
+    // };
   }
 }

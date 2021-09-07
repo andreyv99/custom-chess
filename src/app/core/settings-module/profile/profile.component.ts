@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Cities, Countries } from 'src/app/shared/hardcode/address';
@@ -7,7 +8,7 @@ import { Cities, Countries } from 'src/app/shared/hardcode/address';
 import { UserFormControlNameEnum, userInterface } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 
-export class MyErrorStateMatcher {
+export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
     form: FormGroupDirective | NgForm | null
@@ -88,6 +89,7 @@ export class ProfileComponent {
     });
     this.setUpSelectInputs();
     this.listenControlChanges();
+    console.log(this.form);
   }
 
   setUpSelectInputs() {
