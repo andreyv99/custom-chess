@@ -1,9 +1,20 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgForm,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Cities, Countries } from 'src/app/shared/hardcode/address';
+import { GameLevel } from 'src/app/shared/hardcode/game-level';
 
 import { UserFormControlNameEnum, userInterface } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
@@ -38,6 +49,7 @@ export class ProfileComponent {
 
   countries = Countries;
   cities = Cities;
+  gameLevels = GameLevel;
 
   citiesSubject: BehaviorSubject<any>;
   cities$: Observable<any>;
@@ -55,41 +67,75 @@ export class ProfileComponent {
 
   buildForm(user: userInterface): void {
     this.form = this.fb.group({
-      [this.userFormControlNameEnum.name]: this.fb.group(
-        {
-          [this.userFormControlNameEnum.firstName]: this.fb.control(
-            user.name.firstName,
-            {
-              validators: Validators.required,
-            }
-          ),
-          [this.userFormControlNameEnum.lastName]: user.name.lastName,
-        },
-        {
-          validators: Validators.required,
-        }
-      ),
-      [this.userFormControlNameEnum.address]: this.fb.group(
-        {
-          [this.userFormControlNameEnum.country]: user.address.country,
-          [this.userFormControlNameEnum.city]: user.address.city,
-          [this.userFormControlNameEnum.postalCode]: user.address.postalCode,
-        },
-        {
-          validators: Validators.required,
-        }
-      ),
-      [this.userFormControlNameEnum.email]: this.fb.control(user.email, {
-        validators: Validators.required,
+      [this.userFormControlNameEnum.name]: this.fb.group({
+        [this.userFormControlNameEnum.firstName]: [
+          user.name.firstName,
+          [Validators.required, Validators.maxLength(120)],
+        ],
+        [this.userFormControlNameEnum.lastName]: [
+          user.name.lastName,
+          [Validators.required, Validators.maxLength(120)],
+        ],
       }),
-      [this.userFormControlNameEnum.number]: user.userName,
-      [this.userFormControlNameEnum.password]: user.password,
-      [this.userFormControlNameEnum.birthDate]: user.birthDate,
+      [this.userFormControlNameEnum.address]: this.fb.group({
+        [this.userFormControlNameEnum.country]: [
+          user.address.country,
+          Validators.required,
+        ],
+        [this.userFormControlNameEnum.city]: [
+          user.address.city,
+          Validators.required,
+        ],
+        [this.userFormControlNameEnum.postalCode]: [
+          user.address.postalCode,
+          Validators.required,
+        ],
+      }),
+      [this.userFormControlNameEnum.email]: [
+        user.email,
+        [Validators.required, Validators.email],
+      ],
+      [this.userFormControlNameEnum.number]: [user.number, Validators.required],
+      [this.userFormControlNameEnum.userName]: [
+        user.userName,
+        Validators.required,
+      ],
+      [this.userFormControlNameEnum.password]: [
+        user.password,
+        [Validators.required, this.passwordValidator()],
+      ],
+      [this.userFormControlNameEnum.birthDate]: [
+        user.birthDate,
+        [Validators.required, this.birthDateValidator()],
+      ],
       [this.userFormControlNameEnum.gameLevel]: user.gameLevel,
     });
     this.setUpSelectInputs();
     this.listenControlChanges();
-    console.log(this.form);
+  }
+
+  passwordValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const regex = new RegExp(
+        "^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])[a-zA-Z0-9@#$%^&+=]*$"
+      );
+
+      const invalidPassword = control.value
+        ? !regex.test(control.value)
+        : false;
+      return invalidPassword
+        ? { invalidPassword: { value: control.value } }
+        : null;
+    };
+  }
+
+  birthDateValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const invalidDate = control.value
+        ? control.value.getTime() > new Date().getTime()
+        : false;
+      return invalidDate ? { invalidDate: { value: control.value } } : null;
+    };
   }
 
   setUpSelectInputs() {
@@ -106,6 +152,6 @@ export class ProfileComponent {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    console.log(this.form.value.birthDate.getTime());
   }
 }
