@@ -1,3 +1,11 @@
 .game-zone-container {
   height: 100%;
+  display: flex;
+}
+
+.app-board {
+  height: 100%;
+  display: block;
+  aspect-ratio: 1;
+  width: min-content;
 }

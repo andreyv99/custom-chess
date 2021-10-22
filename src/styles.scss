@@ -29,6 +29,12 @@ body {
   padding: 30px;
 }
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
 .mat-vertical-content {
   padding: 15px !important;
 }
