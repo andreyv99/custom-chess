@@ -7,9 +7,9 @@ import { RoutePath } from './shared/enums/route-path.enum';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     loadChildren: () =>
-      import("./feature/game/game.module").then((m) => m.GameModule),
+      import('./feature/game/game.module').then((m) => m.GameModule),
   },
   {
     path: RoutePath.signUp,
@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: RoutePath.settings,
     loadChildren: () =>
-      import("./core/settings-module/settings.module").then(
+      import('./settings/settings.module').then(
         (m) => m.SettingsModule
       ),
     canActivate: [SettingsGuard],
@@ -26,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: "legacy" })],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

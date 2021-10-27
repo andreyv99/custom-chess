@@ -1,170 +1,159 @@
 <mat-card>
   <mat-card-title>Sign up Form</mat-card-title>
   <mat-card-content>
-    <form #signUpForm="ngForm" (ngSubmit)="onSubmit()">
-      <mat-vertical-stepper [linear]="true" #stepper>
-        <mat-step
-          class="pt-2"
-          [ngModelGroup]="userFormControlNameEnum.name"
-          [stepControl]="signUpForm.controls.name"
-        >
+    <form #signUpForm="ngForm"
+          (ngSubmit)="onSubmit()">
+      <mat-vertical-stepper [linear]="true"
+                            #stepper>
+        <mat-step class="pt-2"
+                  [ngModelGroup]="userFormControlNameEnum.name"
+                  [stepControl]="signUpForm.controls.name">
           <ng-template matStepLabel>Fill out your Name</ng-template>
           <mat-form-field appearance="fill">
             <mat-label>First Name</mat-label>
-            <input
-              matInput
-              placeholder="First name"
-              ngModel
-              [name]="userFormControlNameEnum.firstName"
-              required
-            />
+            <input matInput
+                   placeholder="First name"
+                   ngModel
+                   [name]="userFormControlNameEnum.firstName"
+                   required />
           </mat-form-field>
-          <mat-form-field class="mx-3" appearance="fill">
+          <mat-form-field class="mx-3"
+                          appearance="fill">
             <mat-label>Last Name</mat-label>
-            <input
-              matInput
-              placeholder="Last name"
-              ngModel
-              [name]="userFormControlNameEnum.lastName"
-              required
-            />
+            <input matInput
+                   placeholder="Last name"
+                   ngModel
+                   [name]="userFormControlNameEnum.lastName"
+                   required />
           </mat-form-field>
-          <div>
-            <button mat-button type="button" matStepperNext>Next</button>
-          </div>
-        </mat-step>
-        <mat-step
-          [ngModelGroup]="userFormControlNameEnum.address"
-          [stepControl]="signUpForm.controls.address"
-        >
-          <ng-template matStepLabel>Fill out your Home address</ng-template>
-          <mat-form-field appearance="fill">
-            <mat-label>Choose country</mat-label>
-            <mat-select
-              ngModel
-              #countryCtrl="ngModel"
-              required
-              [name]="userFormControlNameEnum.country"
-            >
-              <mat-option *ngFor="let country of countries" [value]="country">
-                {{ country }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="mx-3" appearance="fill">
-            <mat-label>Choose city</mat-label>
-            <mat-select
-              ngModel
-              [name]="userFormControlNameEnum.city"
-              required
-              [disabled]="!countryCtrl.dirty"
-            >
-              <mat-option
-                *ngFor="let country of cities$ | async"
-                [value]="country"
-              >
-                {{ country }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="mx-3" appearance="fill">
-            <mat-label>Enter postal code</mat-label>
-            <input
-              matInput
-              placeholder="Postal Code"
-              ngModel
-              #postalCodeCtrl="ngModel"
-              type="number"
-              [name]="userFormControlNameEnum.postalCode"
-              min="0"
-              required
-            />
-            <mat-error *ngIf="postalCodeCtrl.errors">
-              Please enter a valid Postal code
-            </mat-error>
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button type="button" matStepperNext>Next</button>
-          </div>
-        </mat-step>
-        <mat-step class="pt-2" [stepControl]="signUpForm.controls.email">
-          <ng-template matStepLabel>Fill out your email</ng-template>
-          <mat-form-field appearance="fill">
-            <mat-label>email</mat-label>
-            <input
-              matInput
-              placeholder="email"
-              ngModel
-              type="email"
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-              [name]="userFormControlNameEnum.email"
-              required
-            />
-          </mat-form-field>
-
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button type="button" matStepperNext>Next</button>
-          </div>
-        </mat-step>
-        <mat-step class="pt-2" [stepControl]="signUpForm.controls.number">
-          <ng-template matStepLabel>Fill out your phone number</ng-template>
-          <mat-form-field appearance="fill">
-            <mat-label>Phone number</mat-label>
-            <input
-              matInput
-              placeholder="number"
-              ngModel
-              type="number"
-              [name]="userFormControlNameEnum.number"
-              required
-            />
-          </mat-form-field>
-
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button type="button" matStepperNext>Next</button>
-          </div>
-        </mat-step>
-        <mat-step class="pt-2" [stepControl]="signUpForm.controls.userName">
-          <ng-template matStepLabel>Create your username</ng-template>
           <mat-form-field appearance="fill">
             <mat-label>Username</mat-label>
-            <input
-              matInput
-              placeholder="username"
-              ngModel
-              #userNameCtrl="ngModel"
-              type="text"
-              asyncUserNameValidator
-              [name]="userFormControlNameEnum.userName"
-              required
-            />
+            <input matInput
+                   placeholder="username"
+                   ngModel
+                   #userNameCtrl="ngModel"
+                   type="text"
+                   asyncUserNameValidator
+                   [name]="userFormControlNameEnum.userName"
+                   required />
             <mat-error *ngIf="userNameCtrl.errors?.error1">
               {{ userNameCtrl.errors.error1.value }}
             </mat-error>
           </mat-form-field>
 
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button type="button" matStepperNext>Next</button>
+            <button mat-button
+                    type="button"
+                    matStepperNext>Next</button>
           </div>
         </mat-step>
-        <mat-step class="pt-2" [stepControl]="signUpForm.controls.password">
+        <mat-step [ngModelGroup]="userFormControlNameEnum.address"
+                  [stepControl]="signUpForm.controls.address">
+          <ng-template matStepLabel>Fill out your Home address</ng-template>
+          <mat-form-field appearance="fill">
+            <mat-label>Choose country</mat-label>
+            <mat-select ngModel
+                        #countryCtrl="ngModel"
+                        required
+                        [name]="userFormControlNameEnum.country">
+              <mat-option *ngFor="let country of countries"
+                          [value]="country">
+                {{ country }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="mx-3"
+                          appearance="fill">
+            <mat-label>Choose city</mat-label>
+            <mat-select ngModel
+                        [name]="userFormControlNameEnum.city"
+                        required
+                        [disabled]="!countryCtrl.dirty">
+              <mat-option *ngFor="let country of cities$ | async"
+                          [value]="country">
+                {{ country }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="mx-3"
+                          appearance="fill">
+            <mat-label>Enter postal code</mat-label>
+            <input matInput
+                   placeholder="Postal Code"
+                   ngModel
+                   #postalCodeCtrl="ngModel"
+                   type="number"
+                   [name]="userFormControlNameEnum.postalCode"
+                   min="0"
+                   required />
+            <mat-error *ngIf="postalCodeCtrl.errors">
+              Please enter a valid Postal code
+            </mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button
+                    matStepperPrevious>Back</button>
+            <button mat-button
+                    type="button"
+                    matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step class="pt-2"
+                  [stepControl]="signUpForm.controls.email">
+          <ng-template matStepLabel>Fill out your email</ng-template>
+          <mat-form-field appearance="fill">
+            <mat-label>email</mat-label>
+            <input matInput
+                   placeholder="email"
+                   ngModel
+                   type="email"
+                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                   [name]="userFormControlNameEnum.email"
+                   required />
+          </mat-form-field>
+
+          <div>
+            <button mat-button
+                    matStepperPrevious>Back</button>
+            <button mat-button
+                    type="button"
+                    matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step class="pt-2"
+                  [stepControl]="signUpForm.controls.number">
+          <ng-template matStepLabel>Fill out your phone number</ng-template>
+          <mat-form-field appearance="fill">
+            <mat-label>Phone number</mat-label>
+            <input matInput
+                   placeholder="number"
+                   ngModel
+                   type="number"
+                   [name]="userFormControlNameEnum.number"
+                   required />
+          </mat-form-field>
+
+          <div>
+            <button mat-button
+                    matStepperPrevious>Back</button>
+            <button mat-button
+                    type="button"
+                    matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step class="pt-2"
+                  [stepControl]="signUpForm.controls.password">
           <ng-template matStepLabel>Create your password</ng-template>
           <mat-form-field appearance="fill">
             <mat-label>Password</mat-label>
-            <input
-              matInput
-              placeholder="password"
-              #passwordCtrl="ngModel"
-              ngModel
-              minlength="8"
-              type="text"
-              [name]="userFormControlNameEnum.password"
-              required
-            />
+            <input matInput
+                   placeholder="password"
+                   #passwordCtrl="ngModel"
+                   ngModel
+                   type="password"
+                   pattern="^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])[a-zA-Z0-9@#$%^&+=]*$"
+                   [name]="userFormControlNameEnum.password"
+                   required />
             <mat-error *ngIf="passwordCtrl.errors?.required">
               This field is required
             </mat-error>
@@ -173,21 +162,23 @@
             </mat-error>
           </mat-form-field>
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button type="button" matStepperNext>Next</button>
+            <button mat-button
+                    matStepperPrevious>Back</button>
+            <button mat-button
+                    type="button"
+                    matStepperNext>Next</button>
           </div>
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>Done</ng-template>
           <p>You are now done.</p>
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button
-              mat-raised-button
-              color="primary"
-              [disabled]="signUpForm.invalid"
-              type="submit"
-            >
+            <button mat-button
+                    matStepperPrevious>Back</button>
+            <button mat-raised-button
+                    color="primary"
+                    [disabled]="signUpForm.invalid"
+                    type="submit">
               Submit
             </button>
           </div>

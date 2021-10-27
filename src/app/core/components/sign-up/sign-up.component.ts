@@ -5,18 +5,18 @@ import { Subject } from 'rxjs';
 import { Cities, Countries } from 'src/app/shared/hardcode/address';
 import { NotificationsService } from 'src/app/shared/services/notifications.service';
 
-import { UserFormControlNameEnum } from '../../models/user.model';
+import { UserFormControlNameEnum } from '../../../shared/models/user.model';
 import { SignUpService } from '../../services/sign-up.service';
 
 @Component({
-  selector: "app-sign-up",
-  templateUrl: "./sign-up.component.html",
-  styleUrls: ["./sign-up.component.scss"],
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignUpComponent implements AfterViewInit {
   @ViewChild(NgForm) signUpForm: NgForm;
-  @ViewChild("countryCtrl", { static: true }) countryCtrl: NgModel;
+  @ViewChild('countryCtrl', { static: true }) countryCtrl: NgModel;
 
   userFormControlNameEnum = UserFormControlNameEnum;
 
@@ -30,7 +30,7 @@ export class SignUpComponent implements AfterViewInit {
     private signUpService: SignUpService,
     private router: Router,
     private notificationsSvc: NotificationsService
-  ) {}
+  ) { }
 
   ngAfterViewInit() {
     this.countryCtrl.valueChanges.subscribe((value) => {
@@ -44,14 +44,14 @@ export class SignUpComponent implements AfterViewInit {
       profileIsFull: false,
     });
     this.notificationsSvc.showNotification(
-      "You've successfully signed up",
-      "cool",
+      'You\'ve successfully signed up',
+      'cool',
       1500,
-      "success-notification"
+      'success-notification'
     );
 
     setTimeout(() => {
-      this.router.navigate(["../"]);
+      this.router.navigate(['../']);
     }, 1500);
   }
 }

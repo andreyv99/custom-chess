@@ -16,8 +16,8 @@ import { tap } from 'rxjs/operators';
 import { Cities, Countries } from 'src/app/shared/hardcode/address';
 import { GameLevel } from 'src/app/shared/hardcode/game-level';
 
-import { UserFormControlNameEnum, userInterface } from '../../models/user.model';
-import { UserService } from '../../services/user.service';
+import { UserFormControlNameEnum, userInterface } from '../../shared/models/user.model';
+import { UserService } from '../../shared/services/user.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -33,9 +33,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 @Component({
-  selector: "app-profile",
-  templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.scss"],
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent {
@@ -61,21 +61,38 @@ export class ProfileComponent {
     ]) as FormControl;
   }
 
+  get postalCodeControl(): FormControl {
+    return this.form.get([
+      this.userFormControlNameEnum.address,
+      this.userFormControlNameEnum.postalCode,
+    ]) as FormControl;
+  }
+
+  get passwordControl(): FormControl {
+    return this.form.get([
+      this.userFormControlNameEnum.password
+    ]) as FormControl;
+  }
+
   errorMatcher = new MyErrorStateMatcher();
 
-  constructor(private userSvc: UserService, private fb: FormBuilder) {}
+  constructor(private userSvc: UserService, private fb: FormBuilder) { }
 
   buildForm(user: userInterface): void {
     this.form = this.fb.group({
       [this.userFormControlNameEnum.name]: this.fb.group({
         [this.userFormControlNameEnum.firstName]: [
-          user.name.firstName,
+          user.name[this.userFormControlNameEnum.firstName],
           [Validators.required, Validators.maxLength(120)],
         ],
         [this.userFormControlNameEnum.lastName]: [
-          user.name.lastName,
+          user.name[this.userFormControlNameEnum.lastName],
           [Validators.required, Validators.maxLength(120)],
         ],
+        [this.userFormControlNameEnum.userName]: [
+          user.name[this.userFormControlNameEnum.userName],
+          Validators.required,
+        ]
       }),
       [this.userFormControlNameEnum.address]: this.fb.group({
         [this.userFormControlNameEnum.country]: [
@@ -96,10 +113,7 @@ export class ProfileComponent {
         [Validators.required, Validators.email],
       ],
       [this.userFormControlNameEnum.number]: [user.number, Validators.required],
-      [this.userFormControlNameEnum.userName]: [
-        user.userName,
-        Validators.required,
-      ],
+
       [this.userFormControlNameEnum.password]: [
         user.password,
         [Validators.required, this.passwordValidator()],
@@ -117,7 +131,7 @@ export class ProfileComponent {
   passwordValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const regex = new RegExp(
-        "^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])[a-zA-Z0-9@#$%^&+=]*$"
+        '^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])[a-zA-Z0-9@#$%^&+=]*$'
       );
 
       const invalidPassword = control.value
@@ -152,6 +166,6 @@ export class ProfileComponent {
   }
 
   onSubmit() {
-    console.log(this.form.value.birthDate.getTime());
+    console.log(this.form.value);
   }
 }
