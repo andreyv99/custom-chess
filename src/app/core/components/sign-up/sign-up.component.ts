@@ -52,6 +52,6 @@ export class SignUpComponent implements AfterViewInit {
 
     setTimeout(() => {
       this.router.navigate(['../']);
-    }, 1500);
+    }, 1500); Bobbobbob123;
   }
 }
