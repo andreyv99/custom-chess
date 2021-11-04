@@ -14,6 +14,9 @@ export class SignUpService {
   ) { }
 
   signUpUser(user: userInterface) {
+    if (user.birthDate) {
+      user.birthDate = user.birthDate.getTime();
+    }
     this.localStorageSvc.putItem(`user-${user.name.userName}`, JSON.stringify(user));
     this.localStorageSvc.putItem(user.name.userName, user.password);
   }

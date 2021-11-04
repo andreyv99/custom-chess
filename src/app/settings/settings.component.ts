@@ -9,7 +9,7 @@ import { UserService } from '../shared/services/user.service';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  userProfileIsFull$ = this.userSvc.user$.pipe(map((x) => !x.profileIsFull));
+  userProfileIsFull$ = this.userSvc.user$.pipe(map((x) => x.profileIsFull));
 
   constructor(private userSvc: UserService) { }
 

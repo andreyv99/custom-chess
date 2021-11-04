@@ -1,36 +1,28 @@
 <div class="header-button-row">
-  <a class="nav-link text-secondary" aria-current="page" href=""
-    >Custom Chess</a
-  >
-  <button
-    *ngIf="isNewUser$ | async; else profile"
-    mat-stroked-button
-    color="primary"
-    (click)="openDialog()"
-  >
+  <a class="nav-link text-secondary"
+     aria-current="page"
+     href="">Custom Chess</a>
+  <button *ngIf="isNewUser$ | async; else profile"
+          mat-stroked-button
+          color="primary"
+          (click)="openDialog()">
     Log In
   </button>
   <span class="divider"></span>
-  <span class="welcome-message" *ngIf="user$ | async as user"
-    >Hi
-    <a
-      class="profile-link"
-      [routerLink]="[routePath.settings, routePath.profile]"
-      >{{ user.name.firstName }}</a
-    >, let's play!</span
-  >
+  <span class="welcome-message"
+        *ngIf="user$ | async as user">Hi
+    <a class="profile-link"
+       [routerLink]="[routePath.settings]">{{ user.name.firstName }}</a>, let's play!</span>
 </div>
 
-<ng-template #profile let-user>
-  <button
-    mat-stroked-button
-    [matBadgeHidden]="user.profileIsFull"
-    matBadge="!"
-    matBadgeSize="small"
-    matBadgeColor="warn"
-    color="primary"
-    [routerLink]="[routePath.settings]"
-  >
+<ng-template #profile>
+  <button mat-stroked-button
+          [matBadgeHidden]="profileIsFull"
+          matBadge="!"
+          matBadgeSize="small"
+          matBadgeColor="warn"
+          color="primary"
+          [routerLink]="[routePath.settings]">
     Settings
   </button>
 </ng-template>

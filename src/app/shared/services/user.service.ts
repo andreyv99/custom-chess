@@ -8,39 +8,39 @@ import { SessionStorageService } from '../../core/services/session-storage.servi
 import { userInterface } from '../models/user.model';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class UserService {
-    isNewUserStatusSubject = new BehaviorSubject(true);
-    isNewUserStatus$ = this.isNewUserStatusSubject.asObservable();
+  isNewUserStatusSubject = new BehaviorSubject(true);
+  isNewUserStatus$ = this.isNewUserStatusSubject.asObservable();
 
-    userRecognizingErrorSubject = new BehaviorSubject(false);
-    userRecognizingError$ = this.userRecognizingErrorSubject.asObservable();
+  userRecognizingErrorSubject = new BehaviorSubject(false);
+  userRecognizingError$ = this.userRecognizingErrorSubject.asObservable();
 
-    userSubject = new Subject<userInterface>();
-    user$ = this.userSubject.asObservable().pipe(
-        shareReplay(),
-        tap((x) => console.log(x))
+  userSubject = new Subject<userInterface>();
+  user$ = this.userSubject.asObservable().pipe(
+    shareReplay(),
+    tap((x) => console.log(x))
+  );
+
+  constructor(
+    private localStorageSvc: LocalStorageService,
+    private sessionStorageSvc: SessionStorageService,
+  ) { }
+
+  getUserRecognizedStatus(userCreds: logInInterface): boolean {
+    return (
+      this.sessionStorageSvc.getItem(userCreds.userName) === userCreds.password
     );
+  }
 
-    constructor(
-        private localStorageSvc: LocalStorageService,
-        private sessionStorageSvc: SessionStorageService
-    ) { }
+  checkIfUserIsKnown(userCreds: logInInterface): boolean {
+    return (
+      this.localStorageSvc.getItem(userCreds.userName) === userCreds.password
+    );
+  }
 
-    getUserRecognizedStatus(userCreds: logInInterface): boolean {
-        return (
-            this.sessionStorageSvc.getItem(userCreds.userName) === userCreds.password
-        );
-    }
-
-    checkIfUserIsKnown(userCreds: logInInterface): boolean {
-        return (
-            this.localStorageSvc.getItem(userCreds.userName) === userCreds.password
-        );
-    }
-
-    getUser(userName: string): userInterface {
-        return JSON.parse(this.localStorageSvc.getItem(`user-${userName}`));
-    }
+  getUser(userName: string): userInterface {
+    return JSON.parse(this.localStorageSvc.getItem(`user-${userName}`));
+  }
 }

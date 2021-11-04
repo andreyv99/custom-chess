@@ -1,47 +1,36 @@
-<form [formGroup]="logInForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="logInForm"
+      (ngSubmit)="onSubmit()">
   <div>
     <mat-form-field appearance="outline">
       <mat-label>Enter your username</mat-label>
-      <input
-        matInput
-        placeholder="Andrey"
-        [formControlName]="userFormControlNameEnum.userName"
-      />
-      <mat-hint>your username or nickname</mat-hint>
+      <input matInput
+             placeholder="Andrey"
+             [formControlName]="userFormControlNameEnum.userName" />
     </mat-form-field>
   </div>
   <div class="pb-5">
     <mat-form-field appearance="outline">
       <mat-label>Enter password</mat-label>
-      <input
-        matInput
-        placeholder="*****"
-        type="password"
-        [formControlName]="userFormControlNameEnum.password"
-      />
+      <input matInput
+             placeholder="*****"
+             type="password"
+             [formControlName]="userFormControlNameEnum.password" />
     </mat-form-field>
     <div class="position-absolute">
-      <small *ngIf="userRecognizingError$ | async"
-        >You need to Sign Up first or try<br />
-        another password or username.</small
-      >
+      <small *ngIf="userRecognizingError$ | async">You need to Sign Up first or try<br />
+        another password or username.</small>
     </div>
   </div>
   <div class="pt-1 d-flex justify-content-between">
-    <button
-      mat-raised-button
-      type="submit"
-      [disabled]="!logInForm.valid"
-      color="primary"
-    >
+    <button mat-raised-button
+            type="submit"
+            [disabled]="!logInForm.valid"
+            color="primary">
       Log In
     </button>
-    <a
-      mat-raised-button
-      color="accent"
-      (click)="closeDialog()"
-      [routerLink]="[routePath.signUp]"
-      >Sign Up</a
-    >
+    <a mat-raised-button
+       color="accent"
+       (click)="closeDialog()"
+       [routerLink]="[routePath.signUp]">Sign Up</a>
   </div>
 </form>

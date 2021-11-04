@@ -1,6 +1,7 @@
 <form *ngIf="user$ | async as user"
       [formGroup]="form"
-      (ngSubmit)="onSubmit()">
+      (ngSubmit)="onSubmit()"
+      class="pt-2">
   <p *ngIf="!user.profileIsFull"
      class="text-danger">
     You have empty fields! Please fill out your profile.
@@ -103,6 +104,9 @@
     <mat-datepicker-toggle matSuffix
                            [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="birthDateControl.errors">
+      You are not real!
+    </mat-error>
   </mat-form-field>
   <div>
     <mat-form-field class="example-full-width"

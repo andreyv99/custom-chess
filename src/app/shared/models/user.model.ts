@@ -12,7 +12,7 @@ export interface userInterface {
   email: string;
   number: number;
   password: string;
-  birthDate?: Date;
+  birthDate?: any;
   gameLevel?: string;
   profileIsFull?: boolean;
 }
